@@ -7,7 +7,7 @@
 
 @code-font-size: 60px;
 @code-font-size-small: 14px;
-@font-size: 72px;
+@font-size: 78px;
 @footer-font-size: 24px;
 @font-weight: 300;
 @font-family: "Open Sans", "Source Sans Pro", sans-serif;
@@ -31,15 +31,30 @@ body {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+.header-common {
   font-family: @header-font-family !important;
   text-transform: none !important;
   margin-bottom: 50px !important;
 }
 
+h1 {
+  .header-common;
+  font-size: @font-size + 40px !important;
+}
+
+h2 {
+  .header-common;
+  font-size: @font-size + 15px !important;
+}
+
+.h3 {
+  .header-common;
+  font-size: @font-size + 5px !important;
+}
+
 section {
   line-height: 130% !important;
-  font-size: @font-size;
+  font-size: @font-size !important;
 }
 
 #footer {
