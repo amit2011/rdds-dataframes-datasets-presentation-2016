@@ -1,28 +1,33 @@
-<section data-background="images/bg2.jpg">
-  <h2>Brief Overview of Spark</h2>
-  <p>Spark is a general computing engine for distributed processing of data.</p>
+<section>
+  <h1>RDDs: Some code</h1>
 
-  <p class="fragment">Spark is:</p>
+  <p>
+    This blob of code creates an RDD from a file on a distributed file system.
+    The file contains an hour's worth of Wikipedia edits.
+  </p>
 
-  <ul>
-    <li class="fragment">
-      <b>Fast.</b>
-      <span class="fragment">
-        Unlike Hadoop, Spark keeps data in memory as much as possible.
-      </span>
-    </li>
-    <li class="fragment">
-      <b>Compact.</b>
-      <span class="fragment">
-        In general, you'll write a lot less code to get a job done in Spark
-        than you would in a framework like Hadoop.
-      </span>
-    </li>
-    <li class="fragment">
-      <b>Multi-language.</b>
-      <span class="fragment">
-        You can write Spark applications in Scala, Java, Python and R.
-      </span>
-    </li>
-  </ul>
+  <pre>
+    <code class="scala" data-trim>
+val rdd = sc.textFile("hdfs:/user/bmc/wikipedia-pagecounts.gz")
+val parsedRDD = rdd.flatMap { line =>
+  line.split("""\s+""") match {
+    case Array(project, _, numRequests, _) => Some((project, numRequests))
+    case _ => None
+  }
+}
+
+parsedRDD.filter { case (project, numRequest) => project == "en" }.
+          reduceByKey(_ + _).
+          take(100).
+          sortBy({ case (page, numRequests) => numRequests}, ascending = false).
+          foreach { case (page, requests) => println(s"$page: $requests") }
+    </code>
+
+  </pre>
+
+  <aside class="notes">
+    Put the `take()` after the sort, for instance, and you will really
+    slow things down.
+  </aside>
+
 </section>

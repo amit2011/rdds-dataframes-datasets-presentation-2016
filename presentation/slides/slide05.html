@@ -1,0 +1,27 @@
+<section>
+  <h1>RDDs</h1>
+
+  <p>
+    RDDs are type-safe. However, they're also low-level, and they suffer from
+    some problems, including:
+  </p>
+
+  <ul>
+    <li class="fragment">
+      They express the <i>how</i> of a solution better than the <i>what</i>.
+    </li>
+    <li class="fragment">
+      It's too easy to build an inefficient RDD transformation chain.
+    </li>
+    <li class="fragment">
+      They cannot be optimized by Spark, because lambdas are opaque.
+    </li>
+    <li class="fragment">
+      They're <i>slow</i> on non-JVM languages like Python.
+    </li>
+  </ul>
+
+  <aside class="notes">
+    This all falls under ease of use, or lack thereof.
+  </aside>
+</section>

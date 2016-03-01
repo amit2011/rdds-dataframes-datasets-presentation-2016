@@ -5,14 +5,14 @@
 
 // Variables
 
-@code-font-size: 16px;
+@code-font-size: 60px;
 @code-font-size-small: 14px;
-@font-size: 40px;
-@footer-font-size: @font-size - 20px;
+@font-size: 72px;
+@footer-font-size: 24px;
 @font-weight: 300;
 @font-family: "Open Sans", "Source Sans Pro", sans-serif;
 @header-font-family: "Droid Serif", "Adobe Garamond", serif;
-@monospace-font-family: Mensch, Consolas, Courier, monospace;
+@monospace-font-family: Consolas, Menlo, monospace;
 
 // Rules
 
@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  font-size: @font-size;
+  font-size: @font-size !important;
   font-family: @font-family;
   font-weight: @font-weight;
 
@@ -34,10 +34,12 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: @header-font-family !important;
   text-transform: none !important;
+  margin-bottom: 50px !important;
 }
 
 section {
   line-height: 130% !important;
+  font-size: @font-size;
 }
 
 #footer {
@@ -71,6 +73,12 @@ img {
 
 p {
   text-align: left;
+  font-size: @font-size !important;
+}
+
+li {
+  font-size: @font-size !important;
+  line-height: 130% !important;
 }
 
 section[data-type=title-slide] {
@@ -143,9 +151,10 @@ pre {
   code {
     padding: 15px !important;
     font-family: @monospace-font-family !important;
-    font-size: @code-font-size;
+    font-size: @code-font-size !important;
     max-height: 700px !important;
     height: 100% !important;
+    line-height: 120% !important;
 
     &.small {
       font-size: @code-font-size-small;

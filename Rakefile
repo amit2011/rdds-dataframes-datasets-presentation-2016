@@ -9,12 +9,14 @@ include Grizzled::FileUtil
 # Constants
 # ----------------------------------------------------------------------------
 
-PRESO_DIR      = "presentation"
-OUTPUT_DIR     = "dist"
-HTML_SOURCES   = Dir.glob("#{PRESO_DIR}/*.html") +
-                 Dir.glob("#{PRESO_DIR}/slides/**/*.html")
-OUTPUT_SLIDES  = "#{OUTPUT_DIR}/index.html"
-SLIDES_LIST    = "slide-list.tmp"
+PRESO_DIR        = "presentation"
+OUTPUT_DIR       = "dist"
+HTML_SOURCES     = Dir.glob("#{PRESO_DIR}/*.html") +
+                   Dir.glob("#{PRESO_DIR}/slides/**/*.html")
+OUTPUT_SLIDES    = "#{OUTPUT_DIR}/index.html"
+SLIDES_LIST      = "slide-list.tmp"
+BOWER_COMPONENTS = Dir.glob("#{PRESO_DIR}/bower_components/*")
+
 # Since SVG images are inlined, we don't want to copy them. We also
 # don't want to copy iDraw sources.
 IMAGES_TO_COPY = Dir.glob("#{PRESO_DIR}/images/*.{png,jpg}")
@@ -67,12 +69,12 @@ file OUTPUT_SLIDES => [:css, :js, :images, :svg] + HTML_SOURCES do
   end
 end
 
-task :js => ["#{PRESO_DIR}/bower_components/reveal.js",
-             "#{PRESO_DIR}/bower_components/jquery",
-             "#{PRESO_DIR}/js/highlightjs"] do
+task :js => BOWER_COMPONENTS + ["#{PRESO_DIR}/js/highlightjs"] do
   mkdir_p "#{OUTPUT_DIR}/js"
-  cp_r "#{PRESO_DIR}/bower_components/reveal.js", "#{OUTPUT_DIR}/js"
-  cp_r "#{PRESO_DIR}/bower_components/jquery", "#{OUTPUT_DIR}/js"
+  puts(BOWER_COMPONENTS)
+  BOWER_COMPONENTS.each do |path|
+    cp_r path, "#{OUTPUT_DIR}/js"
+  end
   cp_r "#{PRESO_DIR}/js/highlightjs", "#{OUTPUT_DIR}/js"
 end
 

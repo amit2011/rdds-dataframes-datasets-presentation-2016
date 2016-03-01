@@ -48,16 +48,18 @@
 
   <script type="text/javascript">
     Reveal.initialize({
-      slideNumber:  false,
+      slideNumber:  true,
       progress:     false,
       center:       false,
       history:      true,
       transition:   'slide',
       controls:     false,
+      width:        2560,
+      height:       1600,
       // Plugins
       dependencies: [
         {
-          src:      'js/reveal.js/plugin/highlight/highlight.js',
+          src:      'js/highlightjs/highlight.pack.js',
           async:    true,
           callback: function() { hljs.initHighlightingOnLoad(); }
         },
