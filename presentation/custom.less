@@ -1,0 +1,164 @@
+// Reveal.js local overrides.
+//
+// NOTE: !important is, regrettably, necessary to override all the !important uses in the
+// reveal.js stylesheets.
+
+// Variables
+
+@code-font-size: 16px;
+@code-font-size-small: 14px;
+@font-size: 40px;
+@footer-font-size: @font-size - 20px;
+@font-weight: 300;
+@font-family: "Open Sans", "Source Sans Pro", sans-serif;
+@header-font-family: "Droid Serif", "Adobe Garamond", serif;
+@monospace-font-family: Mensch, Consolas, Courier, monospace;
+
+// Rules
+
+html {
+}
+
+body {
+  font-size: @font-size;
+  font-family: @font-family;
+  font-weight: @font-weight;
+
+  &.initial-slide {
+    #footer {
+      display: none;
+    }
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: @header-font-family !important;
+  text-transform: none !important;
+}
+
+section {
+  line-height: 130% !important;
+}
+
+#footer {
+  position: absolute;
+  left: 0px;
+  bottom: 10px;
+  height: 75px;
+  width: 100%;
+  font-size: @footer-font-size;
+
+  .nescala-logo {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+}
+
+.slide-number {
+  font-size: @footer-font-size !important;
+}
+
+.logo {
+  width: 100px;
+}
+
+img {
+  border: none !important;
+  background-color: transparent !important;
+  vertical-align: text-bottom;
+}
+
+p {
+  text-align: left;
+}
+
+section[data-type=title-slide] {
+  background: white;
+  text-align: center;
+  border: 1px solid #888;
+  border-radius: 10px 10px 10px 10px;
+
+  h1, h2, h3 {
+    color: black !important;
+    //color: black !important;
+    vertical-align: bottom;
+    font-family: @font-family !important;
+  }
+
+  p.attribution {
+    padding-top: 50px;
+    color: black !important;
+    text-align: center;
+  }
+
+}
+
+p.centered {
+  text-align: center;
+}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  img {
+    height: 60px !important;
+    border: 0;
+  }
+}
+
+ul {
+  ul {
+    li {
+      font-size: smaller !important;
+    }
+  }
+}
+
+&.right {
+  position: absolute;
+  top: 250px;
+  right: 0;
+}
+
+&.left {
+  position: absolute;
+  top:  100px;
+  left: 100px;
+}
+
+.sidebar {
+  font-size: 14px !important;
+}
+
+pre {
+  border: 1px solid transparent !important;
+  //background-color: #3f3f3f;
+  padding: 0;
+  margin: 0 !important;
+  width: 100% !important;
+  box-shadow: 0 0 0 0 !important;
+
+  code {
+    padding: 15px !important;
+    font-family: @monospace-font-family !important;
+    font-size: @code-font-size;
+    max-height: 700px !important;
+    height: 100% !important;
+
+    &.small {
+      font-size: @code-font-size-small;
+      line-height: 1.2;
+    }
+  }
+}
+
+img {
+  border-right-color: white !important;
+  border-left-color: white !important;
+  border-top-color: white !important;
+  border-bottom-color: white !important;
+  box-shadow: none !important;
+}
+
