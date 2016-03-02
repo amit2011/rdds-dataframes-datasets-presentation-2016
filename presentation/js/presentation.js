@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  console.log("!!!");
   // Find all <pre> <code> blocks, get the contents, and remove leading
   // and trailing blank lines.
 
@@ -60,14 +59,33 @@ $(document).ready(function() {
     $("section.present li").addClass("fragment");
   }, false);
 
-  function handleSlideChange(slide) {
+  function handleSlideChange(index, slide) {
     function setBodyClass(className) {
       var body = $("body");
       body.removeClass(); // remove all classes
       body.addClass(className);
     }
 
-    switch ($(slide).data("type")) {
+    // For some reason, the slide isn't always defined (e.g., on a
+    // reload). So, we'll assume that any slide greater than 2 is a normal
+    // slide, if the slide itself isn't defined.
+    if (! slide) {
+      switch (index) {
+        case 0:
+          slideType = "initial-slide";
+          break;
+        case 1:
+          slideType = "title-slide";
+          break;
+        default:
+          slideType = "normal-slide";
+      }
+    }
+    else {
+      slideType = $(slide).data("type");
+    }
+
+    switch (slideType) {
       case "initial-slide":
         setBodyClass("initial-slide");
         break;
@@ -82,8 +100,15 @@ $(document).ready(function() {
 
   Reveal.addEventListener('slidechanged', function(e) {
     // Handle the initial and title slides differently.
-    handleSlideChange(e.currentSlide);
+    handleSlideChange(e.indexh, e.currentSlide);
   });
 
-  handleSlideChange(Reveal.getCurrentSlide());
+  var indices = Reveal.getIndices();
+  var h;
+  if (indices)
+    h = indices.h || 0;
+  else
+    h = 0;
+
+  handleSlideChange(h, Reveal.getCurrentSlide());
 });
