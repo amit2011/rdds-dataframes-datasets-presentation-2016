@@ -5,7 +5,7 @@
 
 // Variables
 
-@code-font-size: 60px;
+@code-font-size: 44px;
 @code-font-size-small: 14px;
 @font-size: 78px;
 @footer-font-size: 24px;
@@ -91,6 +91,10 @@ p {
   font-size: @font-size !important;
 }
 
+ul {
+  margin-left: 20px !important;
+}
+
 li {
   font-size: @font-size !important;
   line-height: 130% !important;
@@ -107,6 +111,7 @@ section[data-type=title-slide] {
     //color: black !important;
     vertical-align: bottom;
     font-family: @font-family !important;
+    text-align: center !important;
   }
 
   p.attribution {
@@ -155,16 +160,42 @@ ul {
   font-size: 14px !important;
 }
 
+.big-vertical-separation {
+  margin-top: 300px !important;
+}
+
+blockquote {
+  border-left: 20px solid #ccc !important;
+  padding-left: 30px !important;
+  color: #555;
+  text-align: left;
+  font-style: normal !important;
+  font-size: @font-size - 15px !important;
+  line-height: 120% !important;
+  margin-top: 30px !important;
+}
+
+.emphasis {
+  color: red !important;
+}
+
+div.code {
+  margin-top: 60px !important;
+  margin-bottom: 60px !important;
+}
+
 pre {
   border: 1px solid transparent !important;
   //background-color: #3f3f3f;
-  padding: 0;
-  margin: 0 !important;
   width: 100% !important;
   box-shadow: 0 0 0 0 !important;
+  background-color: #1d1f21;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
   code {
-    padding: 15px !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
     font-family: @monospace-font-family !important;
     font-size: @code-font-size !important;
     max-height: 700px !important;

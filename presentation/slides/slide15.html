@@ -1,0 +1,21 @@
+<section>
+  <h1>Datasets and the DataFrame API</h1>
+
+  <div class="code">
+    <pre>
+      <code class="scala">
+val counts = words.groupBy(_.toLowerCase).count()
+      </code>
+    </pre>
+  </div>
+
+  <p>
+    The Dataset version can use the DataFrame API's built-in
+    <code>count()</code> aggregator function.
+  </p>
+
+  <p class="fragment">
+    This code is more compact <i>and</i> will tend to execute faster than
+    the RDD counterpart.
+  </p>
+</section>

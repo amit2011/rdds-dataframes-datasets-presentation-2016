@@ -1,33 +1,18 @@
 <section>
-  <h1>RDDs: Some code</h1>
 
-  <p>
-    This blob of code creates an RDD from a file on a distributed file system.
-    The file contains an hour's worth of Wikipedia edits.
-  </p>
+  <h1>RDDs are...</h1>
 
-  <pre>
-    <code class="scala" data-trim>
-val rdd = sc.textFile("hdfs:/user/bmc/wikipedia-pagecounts.gz")
-val parsedRDD = rdd.flatMap { line =>
-  line.split("""\s+""") match {
-    case Array(project, _, numRequests, _) => Some((project, numRequests))
-    case _ => None
-  }
-}
-
-parsedRDD.filter { case (project, numRequest) => project == "en" }.
-          reduceByKey(_ + _).
-          take(100).
-          sortBy({ case (page, numRequests) => numRequests}, ascending = false).
-          foreach { case (page, requests) => println(s"$page: $requests") }
-    </code>
-
-  </pre>
-
-  <aside class="notes">
-    Put the `take()` after the sort, for instance, and you will really
-    slow things down.
-  </aside>
+  <ul>
+    <li class="fragment">
+      Compile-time type-safe
+    </li>
+    <li class="fragment">
+      Based on the Scala collections API, so the operations are familiar
+      to Scala programmers
+    </li>
+    <li class="fragment">
+      <i>Lazy.</i>
+    </li>
+  </ul>
 
 </section>

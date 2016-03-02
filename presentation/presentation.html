@@ -9,12 +9,13 @@
     <link href="js/reveal.js/css/theme/white.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/reveal.js/lib/js/head.min.js"></script>
     <script type="text/javascript" src="js/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lodash/lodash.js"></script>
     <link rel="stylesheet" href="js/highlightjs/styles/tomorrow-night.css"/>
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,600italic,700,400italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <link href="css/custom.css" rel="stylesheet"/>
+    <link href="css/presentation.css" rel="stylesheet"/>
 
     <!-- If the query includes 'print-pdf', include the PDF print sheet -->
     <script>
@@ -46,79 +47,6 @@
     </div>
   </body>
 
-  <script type="text/javascript">
-    Reveal.initialize({
-      slideNumber:  true,
-      progress:     false,
-      center:       false,
-      history:      true,
-      transition:   'slide',
-      controls:     false,
-      width:        2560,
-      height:       1600,
-      // Plugins
-      dependencies: [
-        {
-          src:      'js/highlightjs/highlight.pack.js',
-          async:    true,
-          callback: function() { hljs.initHighlightingOnLoad(); }
-        },
-        {
-          src:   'js/reveal.js/plugin/zoom-js/zoom.js',
-          async: true
-        },
-        {
-          src:   'js/reveal.js/plugin/notes/notes.js',
-          async: true
-        },
-        { src: 'js/reveal.js/plugin/markdown/marked.js',
-          condition: function() {
-            return !!document.querySelector( '[data-markdown]' );
-          }
-        },
-        { src: 'js/reveal.js/plugin/markdown/markdown.js',
-          condition: function() {
-            return !!document.querySelector( '[data-markdown]' );
-          }
-        }
-      ]
-    });
-
-    Reveal.addEventListener('markdown-slide', function(e) {
-      // Alternative to adding ugly HTML for Markdown elements:
-      // Mark slide section with data-state="markdown-slide", and
-      // this code will add fragment classes to all <li>
-      // elements in the slide when the slide is shown.
-      $("section.present li").addClass("fragment");
-    }, false);
-
-    function handleSlideChange(slide) {
-      function setBodyClass(className) {
-        var body = $("body");
-        body.removeClass(); // remove all classes
-        body.addClass(className);
-      }
-
-      switch ($(slide).data("type")) {
-        case "initial-slide":
-          setBodyClass("initial-slide");
-          break;
-        case "title-slide":
-          setBodyClass("title-slide");
-          break;
-        default:
-          setBodyClass("normal-slide");
-          break;
-      }
-    }
-
-    Reveal.addEventListener('slidechanged', function(e) {
-      // Handle the initial and title slides differently.
-      handleSlideChange(e.currentSlide);
-    });
-
-    handleSlideChange(Reveal.getCurrentSlide());
-
-  </script>
+  <script type="text/javascript" src="js/presentation.js"></script>
 
 </html>

@@ -16,6 +16,7 @@ HTML_SOURCES     = Dir.glob("#{PRESO_DIR}/*.html") +
 OUTPUT_SLIDES    = "#{OUTPUT_DIR}/index.html"
 SLIDES_LIST      = "slide-list.tmp"
 BOWER_COMPONENTS = Dir.glob("#{PRESO_DIR}/bower_components/*")
+JS_FILES         = Dir.glob("#{PRESO_DIR}/js/*")
 
 # Since SVG images are inlined, we don't want to copy them. We also
 # don't want to copy iDraw sources.
@@ -25,10 +26,11 @@ WATCHMAN = [
   'watchman-make',
   '--make', 'rake',
   '-p',
-  'Rakefile', "#{PRESO_DIR}/slides/*.html", "#{PRESO_DIR}/images/*",
+  'Rakefile', "#{PRESO_DIR}/slides", "#{PRESO_DIR}/slides/*.html",
+  "#{PRESO_DIR}/images", "#{PRESO_DIR}/images/*",
   "#{PRESO_DIR}/presentation.html", "#{PRESO_DIR}/*.less",
-  "#{PRESO_DIR}/bower.json",
-  '-t', 'build'
+  "#{PRESO_DIR}/bower.json", "#{PRESO_DIR}/js/*",
+  '-t', 'clean build'
 ].join(" ")
 
 # ----------------------------------------------------------------------------
@@ -69,13 +71,15 @@ file OUTPUT_SLIDES => [:css, :js, :images, :svg] + HTML_SOURCES do
   end
 end
 
-task :js => BOWER_COMPONENTS + ["#{PRESO_DIR}/js/highlightjs"] do
+task :js => BOWER_COMPONENTS + JS_FILES do
   mkdir_p "#{OUTPUT_DIR}/js"
   puts(BOWER_COMPONENTS)
   BOWER_COMPONENTS.each do |path|
     cp_r path, "#{OUTPUT_DIR}/js"
   end
-  cp_r "#{PRESO_DIR}/js/highlightjs", "#{OUTPUT_DIR}/js"
+  JS_FILES.each do |path|
+    cp_r path, "#{OUTPUT_DIR}/js"
+  end
 end
 
 task :imagedir do
@@ -97,11 +101,11 @@ task :svg => SVG_FILES + ["#{PRESO_DIR}/images/", :imagedir] do
   end
 end
 
-task :css => ["#{OUTPUT_DIR}/css/custom.css"]
+task :css => ["#{OUTPUT_DIR}/css/presentation.css"]
 
-file "#{OUTPUT_DIR}/css/custom.css" => ["#{PRESO_DIR}/custom.less"] do
+file "#{OUTPUT_DIR}/css/presentation.css" => Dir.glob("#{PRESO_DIR}/*.less") do
   mkdir_p "#{OUTPUT_DIR}/css"
-  sh 'sh', '-c', "lessc #{PRESO_DIR}/custom.less >#{OUTPUT_DIR}/css/custom.css"
+  sh 'sh', '-c', "lessc #{PRESO_DIR}/presentation.less >#{OUTPUT_DIR}/css/presentation.css"
 end
 
 task :clean do

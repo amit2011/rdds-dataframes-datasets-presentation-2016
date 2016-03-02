@@ -1,27 +1,34 @@
 <section>
-  <h1>RDDs</h1>
+  <h1>RDDs: Some code</h1>
 
   <p>
-    RDDs are type-safe. However, they're also low-level, and they suffer from
-    some problems, including:
+    This blob of code creates an RDD from a file on a distributed file system.
+    The file contains an hour's worth of Wikipedia edits.
   </p>
 
-  <ul>
-    <li class="fragment">
-      They express the <i>how</i> of a solution better than the <i>what</i>.
-    </li>
-    <li class="fragment">
-      It's too easy to build an inefficient RDD transformation chain.
-    </li>
-    <li class="fragment">
-      They cannot be optimized by Spark, because lambdas are opaque.
-    </li>
-    <li class="fragment">
-      They're <i>slow</i> on non-JVM languages like Python.
-    </li>
-  </ul>
+  <div class="code">
+    <pre>
+      <code class="scala" data-trim>
+val rdd = sc.textFile("hdfs:/user/bmc/wikipedia-pagecounts.gz")
+val parsedRDD = rdd.flatMap { line =>
+  line.split("""\s+""") match {
+    case Array(project, _, numRequests, _) => Some((project, numRequests))
+    case _ => None
+  }
+}
+
+parsedRDD.filter { case (project, numRequest) => project == "en" }.
+          reduceByKey(_ + _).
+          take(100).
+          sortBy({ case (page, numRequests) => numRequests}, ascending = false).
+          foreach { case (page, requests) => println(s"$page: $requests") }
+      </code>
+    </pre>
+  </div>
 
   <aside class="notes">
-    This all falls under ease of use, or lack thereof.
+    Put the `take()` after the sort, for instance, and you will really
+    slow things down.
   </aside>
+
 </section>
