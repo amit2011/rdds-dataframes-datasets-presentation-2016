@@ -6,4 +6,25 @@
     allowing you to use a query language to manipulate data. In fact, you
     can use SQL, as well.
   </p>
+
+  <div class="fragment">
+    <p>
+      This code does the same thing the previous RDD code does. Look how much
+      easier it is to read.
+    </p>
+
+    <div class="code">
+      <pre>
+        <code class="scala" data-trim>
+val df = parsedRDD.toDF("project", "numRequests")
+
+df.groupBy($"project").
+   agg(sum($"numRequests").as($"count")).
+   limit(100).
+   orderBy($"count").desc.
+   show(100)
+        </code>
+      </pre>
+    </div>
+  </div>
 </section>
