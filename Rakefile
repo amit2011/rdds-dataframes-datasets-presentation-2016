@@ -131,8 +131,7 @@ task :renumber do
 
     source = slide_path
     target = "#{SLIDE_DIR}/slide#{target_num}.html"
-    puts "+ mv #{source} #{target}" if source_num != target_num
-    mv source, target
+    mv source, target if source != target
   end
 end
 
