@@ -11,8 +11,9 @@ include Grizzled::FileUtil
 
 PRESO_DIR        = "presentation"
 OUTPUT_DIR       = "dist"
-HTML_SOURCES     = Dir.glob("#{PRESO_DIR}/*.html") +
-                   Dir.glob("#{PRESO_DIR}/slides/**/*.html")
+SLIDE_DIR        = "#{PRESO_DIR}/slides"
+SLIDES           = Dir.glob("#{SLIDE_DIR}/*.html")
+HTML_SOURCES     = Dir.glob("#{PRESO_DIR}/*.html") + SLIDES
 OUTPUT_SLIDES    = "#{OUTPUT_DIR}/index.html"
 SLIDES_LIST      = "slide-list.tmp"
 BOWER_COMPONENTS = Dir.glob("#{PRESO_DIR}/bower_components/*")
@@ -110,6 +111,29 @@ end
 
 task :clean do
   rm_rf OUTPUT_DIR
+end
+
+desc "Renumber the slides, collapsing gaps. Assumes all are added to git."
+task :renumber do
+
+  slides = SLIDES.map do |filename|
+    if File.basename(filename) =~ /^slide(\d+)\.html$/
+      [filename, $1.to_i]
+    else
+      ["", -1]
+    end
+  end.select { |tup| tup[0] != "" }
+
+  slides.each_with_index.to_a.reverse.each do | slides, index |
+    slide_path, slide_num = slides
+    source_num = "%02d" % slide_num
+    target_num = "%02d" % (index + 1)
+
+    source = slide_path
+    target = "#{SLIDE_DIR}/slide#{target_num}.html"
+    puts "+ mv #{source} #{target}" if source_num != target_num
+    mv source, target
+  end
 end
 
 # ----------------------------------------------------------------------------
