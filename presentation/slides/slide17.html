@@ -1,23 +1,6 @@
 <section>
   <h1>Datasets and Serialization</h1>
 
-  <p>
-    Spark has to serialize data <span class="fragment">... a <i>lot</i>.</span>
-  </p>
+  <img class="stretch" src="images/datasets-serde-perf-chart.png"/>
 
-  <ul>
-    <li class="fragment">
-      Dataset serialization uses custom bytecode generated <i>at runtime</i>.
-    </li>
-
-    <li class="fragment">
-      As a result, serialization can be significantly faster than either
-      native Java or Kryo serialization.
-    </li>
-
-    <li class="fragment">
-      The resulting serialized data will often be up to 2x smaller, as well,
-      which reduces disk use and network use.
-    </li>
-  </ul>
 </section>

@@ -124,7 +124,7 @@ task :renumber do
     end
   end.select { |tup| tup[0] != "" }
 
-  slides.each_with_index.to_a.reverse.each do | slides, index |
+  slides.each_with_index.to_a.each do | slides, index |
     slide_path, slide_num = slides
     source_num = "%02d" % slide_num
     target_num = "%02d" % (index + 1)

@@ -1,0 +1,21 @@
+<section>
+  <h1>The DataFrame API</h1>
+  <h2>SQL code</h2>
+
+  <p>
+    Here's the same thing in SQL.
+  </p>
+
+  <div class="code">
+    <pre>
+      <code class="scala">
+df.registerTempTable("edits")
+sqlContext.sql(
+  "SELECT project, sum(numRequests) AS count FROM edits " +
+  "ORDER BY count DESC LIMIT 100"
+).
+show(100)
+      </code>
+    </pre>
+  </div>
+</section>

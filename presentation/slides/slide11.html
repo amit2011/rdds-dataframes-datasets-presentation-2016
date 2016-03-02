@@ -1,7 +1,32 @@
 <section>
-  <h1>DataFrames are faster</h1>
+  <h1>But we've lost type safety</h1>
 
-  <p>Because of the optimization, they tend to outperform RDDs.</p>
+  <p>
+    Using the previous DataFrame (with <code>project</code>
+    and <code>numRequests</code>), what happens if we call
+    <code>collect()</code>?
+  </p>
 
-  <img class="stretch" src="images/dataframe-performance.png"/>
+  <div class="code">
+    <pre>
+      <code class="scala" data-trim>
+df.collect() // => yields Array[org.apache.spark.sql.Row]
+      </code>
+    </pre>
+  </div>
+
+  <p>
+    Unfortunately, <code>Row</code> isn't typesafe:
+  </p>
+
+  <div class="code">
+    <pre>
+      <code class="scala" data-trim>
+df.collect().map { row =>
+  val project = row(0).asInstanceOf[String]   // Yuck.
+  val numRequests = row(1).asInstanceOf[Long] // Yuck.
+}
+      </code>
+    </pre>
+  </div>
 </section>
