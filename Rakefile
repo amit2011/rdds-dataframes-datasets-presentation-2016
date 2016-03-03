@@ -131,8 +131,14 @@ task :renumber do
     target_num = "%02d" % (index + 1)
 
     source = slide_path
-    target = "#{SLIDE_DIR}/slide#{target_num}.html"
-    mv source, target if source != target
+    mv source, "tmp/#{target_num}.html"
+  end
+
+  (1..slides.length).each do | index |
+    index_s = "%02d" % index
+    target = "#{SLIDE_DIR}/slide#{index_s}.html"
+    tmp = "tmp/#{index_s}.html"
+    mv tmp, target
   end
 end
 
@@ -237,6 +243,9 @@ def augment_svg(svg_file, svg_out, add_fragment_index: false)
   #%w{x y viewBox height width}.each { |attr| image.root.delete(attr) }
   %w{x y height width}.each { |attr| image.root.delete(attr) }
   File.open svg_out, "w" do |f|
-    f.write(image.to_xml(save_with: Nokogiri::XML::Node::SaveOptions::NO_DECLARATION))
+    # Skip to the SVG element, in case there's a processing instruction or
+    # doctype. They're not necessary, since we're embedding.
+    f.write(image.at_xpath('//svg').to_xml)
   end
+
 end
