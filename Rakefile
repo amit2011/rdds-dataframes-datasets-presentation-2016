@@ -54,7 +54,7 @@ task :dist => :build
 task :html => OUTPUT_SLIDES
 
 desc "Watch for changed files and rebuild. Requires watchman."
-task :watch do
+task :watch => :build do
   # Assumes watchman is installed. http://facebook.github.com/watchman
   sh WATCHMAN
 end

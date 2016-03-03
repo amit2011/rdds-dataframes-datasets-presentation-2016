@@ -1,0 +1,19 @@
+<section>
+  <h1>Enter Datasets</h1>
+
+  <p>Like an RDD, Dataset has a <i>type</i>.</p>
+
+  <pre class="fragment">
+    <code class="scala">
+// Read a DataFrame from a JSON file
+val df = sqlContext.read.json("people.json")
+// Convert the data to a domain object.
+case class Person(name: String, age: Int)
+val ds: Dataset[Person] = df.as[Person]
+    </code>
+  </pre>
+
+  <p>
+    A DataFrame is just a <code>Dataset[Row]</code>.
+  </p>
+</section>
