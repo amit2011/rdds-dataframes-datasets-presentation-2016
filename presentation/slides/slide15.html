@@ -1,25 +1,21 @@
 <section>
-  <h1>Datasets and Memory</h1>
+  <h1>Datasets and the DataFrame API</h1>
 
-  <p>Datasets can result in less memory use.</p>
+  <div class="code">
+    <pre>
+      <code class="scala">
+val counts = words.groupBy(_.toLowerCase).count()
+      </code>
+    </pre>
+  </div>
 
-  <ul>
-    <li class="fragment">
-      Spark understands the structure of data in Datasets, because they're
-      <i>typed</i>.
-    </li>
-    <li class="fragment">
-      Spark uses <i>encoders</i> to translate between these types ("domain
-      objects") and Spark's compact internal Tungsten data format.
-    </li>
-    <li class="fragment">
-      It generates these encoders via runtime code-generation. The
-      generated code can operate <i>directly</i> on the Tungsten compact
-      format.
-    </li>
-    <li class="fragment">
-      <i>No serialization/deserialization necessary</i>. Memory is conserved,
-      because of the compact format. Speed is improved by custom code-generation.
-    </li>
-  </ul>
+  <p>
+    The Dataset version can use the DataFrame API's built-in
+    <code>count()</code> aggregator function.
+  </p>
+
+  <p class="fragment">
+    This code is more compact <i>and</i> will tend to execute faster than
+    the RDD counterpart.
+  </p>
 </section>
