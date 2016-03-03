@@ -21,8 +21,8 @@ $(document).ready(function() {
     history:      true,
     transition:   'slide',
     controls:     false,
-    width:        2560,
-    height:       1600,
+    width:        2560, // Coupled to presentation.less
+    height:       1600, // Coupled to presentation.less
     // Plugins
     dependencies: [
       {

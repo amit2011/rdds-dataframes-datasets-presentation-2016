@@ -14,6 +14,15 @@
 @header-font-family: "Droid Serif", "Adobe Garamond", serif;
 @monospace-font-family: Consolas, Menlo, monospace;
 
+// Coupled to presentation.js
+// -----------------------------
+@revealWidth: 2560px;
+@revealHeight: 1600px;
+// -----------------------------
+
+@svgWidth: @revealWidth * 0.95;
+@svgHeight: @revealHeight * 0.95;
+
 // Rules
 
 html {
@@ -28,6 +37,24 @@ body {
     #footer {
       display: none;
     }
+  }
+}
+
+// See https://css-tricks.com/scale-svg/
+.svg-image {
+  position: relative;
+  height: @svgHeight !important;
+  width: @svgWidth !important;
+  padding: 0;
+  padding-bottom: 100%;
+
+  svg {
+    //width: @svgWidth !important;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
   }
 }
 

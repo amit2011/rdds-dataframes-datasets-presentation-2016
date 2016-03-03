@@ -4,3 +4,4 @@ presentation/bower_components
 /.idea
 *.iml
 *.tmp
+.DS_Store

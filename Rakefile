@@ -95,8 +95,10 @@ SVG_FILES = Dir.glob("#{PRESO_DIR}/images/*.svg")
 task :svg => SVG_FILES + ["#{PRESO_DIR}/images/", :imagedir] do
   # For each file, modify each <g> element with an "id" attribute that
   # starts with "Layer" so that the <g> element is a Reveal.js fragment.
+  mkdir_p "tmp"
   SVG_FILES.each do |svg|
-    out = "#{OUTPUT_DIR}/images/#{File.basename(svg)}"
+    out = "tmp/#{File.basename(svg)}"
+    #out = "#{OUTPUT_DIR}/images/#{File.basename(svg)}"
     puts "Animating layers in #{svg} to #{out}"
     augment_svg svg, out
   end
@@ -117,7 +119,7 @@ desc "Renumber the slides, collapsing gaps. Assumes all are added to git."
 task :renumber do
 
   slides = SLIDES.map do |filename|
-    if File.basename(filename) =~ /^slide(\d+)\.html$/
+    if File.basename(filename) =~ /^slide.*\.html$/
       [filename, $1.to_i]
     else
       ["", -1]
@@ -126,7 +128,6 @@ task :renumber do
 
   slides.each_with_index.to_a.each do | slides, index |
     slide_path, slide_num = slides
-    source_num = "%02d" % slide_num
     target_num = "%02d" % (index + 1)
 
     source = slide_path
@@ -160,7 +161,7 @@ end
 #                      data-fragment-index="n" attribute to each layer <g>
 #                      element, to force the layers to show up in the order
 #                      they appear in the image.
-def augment_svg(svg_file, svg_out, add_fragment_index: true)
+def augment_svg(svg_file, svg_out, add_fragment_index: false)
   def get_classes(element)
     attr = element.attribute('class')
     if attr
@@ -203,6 +204,7 @@ def augment_svg(svg_file, svg_out, add_fragment_index: true)
   image = File.open(svg_file) { |f| Nokogiri::XML(f) }
   image.remove_namespaces!
   layers = image.xpath("//g[@id]")
+
   if layers.length == 0
     # Nothing to do
   elsif layers.length == 1
@@ -219,6 +221,7 @@ def augment_svg(svg_file, svg_out, add_fragment_index: true)
         remove_fragment(g)
       else
         add_fragment(g)
+
         if add_fragment_index
           g['data-fragment-index'] = i.to_s
         end
@@ -228,13 +231,12 @@ def augment_svg(svg_file, svg_out, add_fragment_index: true)
       if id.value.include?('one-time')
         add_class(g, 'current-visible')
       end
-
     end
   end
 
-  %w{x y viewBox}.each { |attr| image.root.delete(attr) }
-
+  #%w{x y viewBox height width}.each { |attr| image.root.delete(attr) }
+  %w{x y height width}.each { |attr| image.root.delete(attr) }
   File.open svg_out, "w" do |f|
-    f.write(image.to_xml)
+    f.write(image.to_xml(save_with: Nokogiri::XML::Node::SaveOptions::NO_DECLARATION))
   end
 end

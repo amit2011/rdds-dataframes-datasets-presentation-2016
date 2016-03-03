@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="2500" height="400" viewBox="0, 0, 2500, 400">
+  <g id="API_docs">
+    <text transform="matrix(1, 0, 0, 1, 93, 67)"/>
+    <text transform="matrix(1, 0, 0, 1, 677.992, 81.5)">
+      <tspan x="-584.992" y="6.5" font-family="Consolas" font-size="28" fill="#000000">def collect[U](f: PartialFunction[T, U])(</tspan>
+      <tspan x="46.184" y="6.5" font-family="Consolas-Italic" font-size="28" fill="#000000">implicit</tspan>
+      <tspan x="169.34" y="6.5" font-family="Consolas" font-size="28" fill="#000000"> arg0: ClassTag[U]): RDD[U]</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 270.037, 188)">
+      <tspan x="-177.037" y="6.5" font-family="Consolas" font-size="28" fill="#000000">def collect(): Array[T]</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 557.421, 119)">
+      <tspan x="-398.421" y="9.5" font-family="HelveticaNeue" font-size="28" fill="#000000">Return an RDD that contains all matching values by applying </tspan>
+      <tspan x="367.631" y="9.5" font-family="Consolas" font-size="28" fill="#000000">f.</tspan>
+    </text>
+    <path d="M93.5,155.5 L1288.5,155.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <text transform="matrix(1, 0, 0, 1, 536.566, 232.5)">
+      <tspan x="-377.566" y="10" font-family="HelveticaNeue" font-size="28" fill="#000000">Return an array that contains all of the elements in this RDD.</tspan>
+    </text>
+  </g>
+  <g id="Annotation-1">
+    <path d="M150,61 L263,61 L263,96 L150,96 L150,61 z" fill="#F2FF02" fill-opacity="0.341"/>
+    <g>
+      <path d="M257.698,94.514 L677.5,301.5" fill-opacity="0" stroke="#FF0000" stroke-width="3"/>
+      <path d="M259.555,90.747 L247.653,89.561 L255.841,98.281 z" fill="#FF0000" fill-opacity="1" stroke="#FF0000" stroke-width="3" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 907.95, 323)">
+      <tspan x="-215.95" y="10" font-family="HelveticaNeue" font-size="28" fill="#FC0000">Scala collections version of </tspan>
+      <tspan x="133.518" y="10" font-family="HelveticaNeue-Italic" font-size="28" fill="#FC0000">collect</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 93, 67)"/>
+    <text transform="matrix(1, 0, 0, 1, 677.992, 81.5)">
+      <tspan x="-584.992" y="6.5" font-family="Consolas" font-size="28" fill="#838383">def </tspan>
+      <tspan x="-523.414" y="6.5" font-family="Consolas" font-size="28" fill="#000000">collect</tspan>
+      <tspan x="-415.652" y="6.5" font-family="Consolas" font-size="28" fill="#838383">[U](f: PartialFunction[T, U])(</tspan>
+      <tspan x="46.184" y="6.5" font-family="Consolas-Italic" font-size="28" fill="#838383">implicit</tspan>
+      <tspan x="169.34" y="6.5" font-family="Consolas" font-size="28" fill="#838383"> arg0: ClassTag[U]): RDD[U]</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 270.037, 188)">
+      <tspan x="-177.037" y="6.5" font-family="Consolas" font-size="28" fill="#838383">def collect(): Array[T]</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 557.421, 119)">
+      <tspan x="-398.421" y="9.5" font-family="HelveticaNeue" font-size="28" fill="#838383">Return an RDD that contains all matching values by applying </tspan>
+      <tspan x="367.631" y="9.5" font-family="Consolas" font-size="28" fill="#838383">f.</tspan>
+    </text>
+    <path d="M93.5,155.5 L1288.5,155.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <text transform="matrix(1, 0, 0, 1, 536.566, 232.5)">
+      <tspan x="-377.566" y="10" font-family="HelveticaNeue" font-size="28" fill="#838383">Return an array that contains all of the elements in this RDD.</tspan>
+    </text>
+  </g>
+  <g id="Annotation-2">
+    <g>
+      <path d="M245.204,212.529 L318.5,284.5" fill-opacity="0" stroke="#FF0000" stroke-width="3"/>
+      <path d="M248.147,209.532 L237.212,204.682 L242.261,215.525 z" fill="#FF0000" fill-opacity="1" stroke="#FF0000" stroke-width="3" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 360.05, 301)">
+      <tspan x="-124.194" y="10" font-family="HelveticaNeue" font-size="28" fill="#FC0000">Spark </tspan>
+      <tspan x="-42.77" y="10" font-family="HelveticaNeue-Italic" font-size="28" fill="#FC0000">collect</tspan>
+      <tspan x="39.662" y="10" font-family="HelveticaNeue" font-size="28" fill="#FC0000"> action</tspan>
+    </text>
+    <g>
+      <path d="M150.5,168 L263.5,168 L263.5,209 L150.5,209 L150.5,168 z" fill="#02C5FF" fill-opacity="0.246"/>
+      <path d="M150.5,168 L263.5,168 L263.5,209 L150.5,209 L150.5,168 z" fill-opacity="0" stroke="#AFE8FF" stroke-width="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 270.037, 188)">
+      <tspan x="-177.037" y="6.5" font-family="Consolas" font-size="28" fill="#838383">def </tspan>
+      <tspan x="-115.459" y="6.5" font-family="Consolas" font-size="28" fill="#000000">collect</tspan>
+      <tspan x="-7.697" y="6.5" font-family="Consolas" font-size="28" fill="#838383">(): Array[T]</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 536.566, 232.5)">
+      <tspan x="-377.566" y="10" font-family="HelveticaNeue" font-size="28" fill="#838383">Return an array that contains all of the elements in this RDD.</tspan>
+    </text>
+  </g>
+</svg>
