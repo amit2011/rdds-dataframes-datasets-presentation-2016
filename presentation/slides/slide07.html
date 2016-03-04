@@ -1,4 +1,4 @@
-<section>
+ <section>
   <h1>The DataFrame API</h1>
 
   <p>
@@ -9,8 +9,8 @@
 
   <div class="fragment">
     <p>
-      This code does the same thing the previous RDD code does. Look how much
-      easier it is to read.
+      This code does essentially the same thing the previous RDD code does.
+      Look how much easier it is to read.
     </p>
 
     <div class="code">
@@ -21,7 +21,6 @@ val df = parsedRDD.toDF("project", "numRequests")
 df.groupBy($"project").
    agg(sum($"numRequests").as($"count")).
    limit(100).
-   orderBy($"count").desc.
    show(100)
         </code>
       </pre>

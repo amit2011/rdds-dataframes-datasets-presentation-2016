@@ -7,21 +7,32 @@
   </p>
 
   <ul>
-    <li class="fragment">
+    <li class="fragment" data-fragment-index="1">
       They express the <i>how</i> of a solution better than the <i>what</i>.
     </li>
-    <li class="fragment">
-      It's too easy to build an inefficient RDD transformation chain.
-    </li>
-    <li class="fragment">
+    <li class="fragment" data-fragment-index="2">
       They cannot be optimized by Spark.
     </li>
-    <li class="fragment">
+    <li class="fragment" data-fragment-index="3">
       They're <i>slow</i> on non-JVM languages like Python.
+    </li>
+    <li class="fragment" data-fragment-index="4">
+      It's too easy to build an inefficient RDD transformation chain.
     </li>
   </ul>
 
+  <pre class="fragment" data-fragment-index="4">
+    <code class="scala">
+parsedRDD.reduceByKey(_ + _).                                       <span class="emphasis">&lt;--- INEFFICIENT</span>
+          filter { case (project, numRequest) => project == "en" }. <span class="emphasis">&lt;--- ORDERING</span>
+          take(100).
+          foreach { case (page, requests) => println(s"$page: $requests") }
+    </code>
+  </pre>
+
   <aside class="notes">
-    This all falls under ease of use, or lack thereof.
+    Put the `take()` after the sort, for instance, and you will really
+    slow things down.
   </aside>
+
 </section>

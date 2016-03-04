@@ -27,7 +27,7 @@
       <tspan x="-45.108" y="7.45" font-family="HelveticaNeue" font-size="28" fill="#000000">Logical</tspan>
       <tspan x="-27.482" y="41.45" font-family="HelveticaNeue" font-size="28" fill="#000000">Plan</tspan>
     </text>
-    <text transform="matrix(1, 0, 0, 1, 399.554, 418.409)">
+    <text transform="matrix(1, 0, 0, 1, 413.73, 418.409)">
       <tspan x="-48.734" y="5.698" font-family="HelveticaNeue" font-size="28" fill="#000000">Catalog</tspan>
     </text>
     <text transform="matrix(1, 0, 0, 1, 512.226, 242.451)">
@@ -89,6 +89,9 @@
     </text>
     <text transform="matrix(1, 0, 0, 1, 1387.744, 230.451)">
       <tspan x="-36.302" y="10" font-family="HelveticaNeue" font-size="28" fill="#000000">RDDs</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 1366.828, 429.902)">
+      <tspan x="-96.021" y="3" font-family="HelveticaNeue-LightItalic" font-size="18" fill="#000000">Diagram from Databricks</tspan>
     </text>
   </g>
   <g id="UDFs">

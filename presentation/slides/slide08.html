@@ -10,11 +10,7 @@
     <pre>
       <code class="scala">
 df.registerTempTable("edits")
-sqlContext.sql(
-  "SELECT project, sum(numRequests) AS count FROM edits " +
-  "ORDER BY count DESC LIMIT 100"
-).
-show(100)
+sqlContext.sql("SELECT project, sum(numRequests) AS count FROM edits LIMIT 100").show(100)
       </code>
     </pre>
   </div>

@@ -3,7 +3,6 @@
 
   <p>
     This blob of code creates an RDD from a file on a distributed file system.
-    The file contains an hour's worth of Wikipedia edits.
   </p>
 
   <div class="code">
@@ -20,15 +19,9 @@ val parsedRDD = rdd.flatMap { line =>
 parsedRDD.filter { case (project, numRequest) => project == "en" }.
           reduceByKey(_ + _).
           take(100).
-          sortBy({ case (page, numRequests) => numRequests}, ascending = false).
           foreach { case (page, requests) => println(s"$page: $requests") }
       </code>
     </pre>
   </div>
-
-  <aside class="notes">
-    Put the `take()` after the sort, for instance, and you will really
-    slow things down.
-  </aside>
 
 </section>

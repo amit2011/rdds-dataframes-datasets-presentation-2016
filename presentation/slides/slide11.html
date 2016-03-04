@@ -9,14 +9,19 @@
 
   <div class="code">
     <pre>
-      <code class="scala" data-trim>
-df.collect() // => yields Array[org.apache.spark.sql.Row]
+      <code class="scala">
+scala> :type df.collect()
+Array[org.apache.spark.sql.Row]
       </code>
     </pre>
   </div>
 
   <p>
-    Unfortunately, <code>Row</code> isn't typesafe:
+    Unfortunately, <code>Row</code> isn't typesafe. It's defined as<br/>
+    <code class="scala indented">trait Row extends Serializable</code>
+  </p>
+  <p>
+    Mapping it back to something useful is ugly and error-prone:
   </p>
 
   <div class="code">

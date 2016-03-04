@@ -113,6 +113,8 @@ end
 
 task :clean do
   rm_rf OUTPUT_DIR
+  tmpfiles = Dir.glob("tmp/*")
+  rm_rf tmpfiles if tmpfiles.length > 0
 end
 
 desc "Renumber the slides, collapsing gaps. Assumes all are added to git."

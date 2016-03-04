@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="1400" height="500" viewBox="0, 0, 1400, 500">
+  <g id="logical-plan">
+    <path d="M125.5,116.5 L238.5,116.5 C245.127,116.5 250.5,121.873 250.5,128.5 L250.5,190.5 C250.5,197.127 245.127,202.5 238.5,202.5 L125.5,202.5 C118.873,202.5 113.5,197.127 113.5,190.5 L113.5,128.5 C113.5,121.873 118.873,116.5 125.5,116.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M40.5,382.5 L153.5,382.5 C160.127,382.5 165.5,387.873 165.5,394.5 L165.5,456.5 C165.5,463.127 160.127,468.5 153.5,468.5 L40.5,468.5 C33.873,468.5 28.5,463.127 28.5,456.5 L28.5,394.5 C28.5,387.873 33.873,382.5 40.5,382.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M203.5,382.5 L316.5,382.5 C323.127,382.5 328.5,387.873 328.5,394.5 L328.5,456.5 C328.5,463.127 323.127,468.5 316.5,468.5 L203.5,468.5 C196.873,468.5 191.5,463.127 191.5,456.5 L191.5,394.5 C191.5,387.873 196.873,382.5 203.5,382.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M125.5,244.5 L238.5,244.5 C245.127,244.5 250.5,249.873 250.5,256.5 L250.5,318.5 C250.5,325.127 245.127,330.5 238.5,330.5 L125.5,330.5 C118.873,330.5 113.5,325.127 113.5,318.5 L113.5,256.5 C113.5,249.873 118.873,244.5 125.5,244.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <text transform="matrix(1, 0, 0, 1, 181.5, 159)">
+      <tspan x="-26.95" y="10" font-family="HelveticaNeue" font-size="28" fill="#000000">filter</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 181.5, 287)">
+      <tspan x="-22.036" y="10" font-family="HelveticaNeue" font-size="28" fill="#000000">join</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 96.367, 429)">
+      <tspan x="-29.82" y="-7" font-family="HelveticaNeue" font-size="28" fill="#000000">scan</tspan>
+      <tspan x="-41.216" y="27" font-family="HelveticaNeue" font-size="28" fill="#000000">(users)</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 259.367, 429)">
+      <tspan x="-29.82" y="-7" font-family="HelveticaNeue" font-size="28" fill="#000000">scan</tspan>
+      <tspan x="-48.482" y="27" font-family="HelveticaNeue" font-size="28" fill="#000000">(events)</tspan>
+    </text>
+    <g>
+      <path d="M178.5,244.5 L177.714,211.497" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M180.713,211.426 L177.524,203.5 L174.715,211.569 z" fill="#000000" fill-opacity="1" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <g>
+      <path d="M93.5,382.5 L169.848,335.237" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M171.427,337.788 L176.65,331.026 L168.269,332.686 z" fill="#000000" fill-opacity="1" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <g>
+      <path d="M256.5,382.5 L185.018,335.448" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M186.667,332.942 L178.335,331.05 L183.368,337.954 z" fill="#000000" fill-opacity="1" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 177.5, 69.5)">
+      <tspan x="-71.036" y="10" font-family="HelveticaNeue" font-size="28" fill="#000000">logical plan</tspan>
+    </text>
+  </g>
+  <g id="inefficient-one-time">
+    <g>
+      <path d="M302.5,197.5 L215.862,269.737" fill-opacity="0" stroke="#FC0404" stroke-width="1"/>
+      <path d="M213.941,267.432 L209.718,274.86 L217.784,272.041 z" fill="#FC0404" fill-opacity="1" stroke="#FC0404" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 351.448, 192)">
+      <tspan x="-47.04" y="-10" font-family="HelveticaNeue" font-size="20" fill="#FF0000">This join is</tspan>
+      <tspan x="-42.81" y="14" font-family="HelveticaNeue" font-size="20" fill="#FF0000">inefficient</tspan>
+    </text>
+  </g>
+  <g id="optimized-plan">
+    <path d="M602.5,111.5 L715.5,111.5 C722.127,111.5 727.5,116.873 727.5,123.5 L727.5,185.5 C727.5,192.127 722.127,197.5 715.5,197.5 L602.5,197.5 C595.873,197.5 590.5,192.127 590.5,185.5 L590.5,123.5 C590.5,116.873 595.873,111.5 602.5,111.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M680.5,244.5 L793.5,244.5 C800.127,244.5 805.5,249.873 805.5,256.5 L805.5,318.5 C805.5,325.127 800.127,330.5 793.5,330.5 L680.5,330.5 C673.873,330.5 668.5,325.127 668.5,318.5 L668.5,256.5 C668.5,249.873 673.873,244.5 680.5,244.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M680.5,377.5 L793.5,377.5 C800.127,377.5 805.5,382.873 805.5,389.5 L805.5,451.5 C805.5,458.127 800.127,463.5 793.5,463.5 L680.5,463.5 C673.873,463.5 668.5,458.127 668.5,451.5 L668.5,389.5 C668.5,382.873 673.873,377.5 680.5,377.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M517.5,244.5 L630.5,244.5 C637.127,244.5 642.5,249.873 642.5,256.5 L642.5,318.5 C642.5,325.127 637.127,330.5 630.5,330.5 L517.5,330.5 C510.873,330.5 505.5,325.127 505.5,318.5 L505.5,256.5 C505.5,249.873 510.873,244.5 517.5,244.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <text transform="matrix(1, 0, 0, 1, 736.5, 292)">
+      <tspan x="-26.95" y="10" font-family="HelveticaNeue" font-size="28" fill="#000000">filter</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 573.5, 287)">
+      <tspan x="-29.82" y="-7" font-family="HelveticaNeue" font-size="28" fill="#000000">scan</tspan>
+      <tspan x="-41.216" y="27" font-family="HelveticaNeue" font-size="28" fill="#000000">(users)</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 740.518, 420)">
+      <tspan x="-29.82" y="-7" font-family="HelveticaNeue" font-size="28" fill="#000000">scan</tspan>
+      <tspan x="-48.482" y="27" font-family="HelveticaNeue" font-size="28" fill="#000000">(events)</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 658.5, 154)">
+      <tspan x="-22.036" y="10" font-family="HelveticaNeue" font-size="28" fill="#000000">join</tspan>
+    </text>
+    <g>
+      <path d="M735.5,377.5 L734.691,339.498" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M737.691,339.434 L734.521,331.5 L731.692,339.562 z" fill="#000000" fill-opacity="1" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <g>
+      <path d="M572.5,244.5 L651.582,201.778" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M653.008,204.417 L658.62,197.975 L650.156,199.138 z" fill="#000000" fill-opacity="1" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <g>
+      <path d="M734.5,244.5 L667.126,202.279" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M668.719,199.737 L660.347,198.031 L665.533,204.821 z" fill="#000000" fill-opacity="1" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 658.5, 69.5)">
+      <tspan x="-92.05" y="10" font-family="HelveticaNeue" font-size="28" fill="#000000">optimized plan</tspan>
+    </text>
+  </g>
+  <g id="filter-pushdown-one-time">
+    <path d="M777.5,142.5 L777.5,142.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M818.5,171.5 L818.5,171.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <g>
+      <path d="M692.536,92.5 C772.262,94.377 787.743,175.499 789.349,223.5" fill-opacity="0" stroke="#FF0000" stroke-width="1" stroke-dasharray="6,5"/>
+      <path d="M786.349,223.551 L789.483,231.499 L792.349,223.45 z" fill="#FF0000" fill-opacity="1" stroke="#FF0000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 855.136, 177.5)">
+      <tspan x="-59.136" y="-24.5" font-family="HelveticaNeue" font-size="20" fill="#FF0000">Catalyst</tspan>
+      <tspan x="-59.136" y="-0.5" font-family="HelveticaNeue" font-size="20" fill="#FF0000">pushes the</tspan>
+      <tspan x="-59.136" y="23.5" font-family="HelveticaNeue" font-size="20" fill="#FF0000">filter down</tspan>
+    </text>
+  </g>
+  <g id="optimized-plan-2">
+    <path d="M1104.5,116.5 L1217.5,116.5 C1224.127,116.5 1229.5,121.873 1229.5,128.5 L1229.5,190.5 C1229.5,197.127 1224.127,202.5 1217.5,202.5 L1104.5,202.5 C1097.873,202.5 1092.5,197.127 1092.5,190.5 L1092.5,128.5 C1092.5,121.873 1097.873,116.5 1104.5,116.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1023,316.5 L1136,316.5 C1142.627,316.5 1148,321.873 1148,328.5 L1148,390.5 C1148,397.127 1142.627,402.5 1136,402.5 L1023,402.5 C1016.373,402.5 1011,397.127 1011,390.5 L1011,328.5 C1011,321.873 1016.373,316.5 1023,316.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1186,316.5 L1299,316.5 C1305.627,316.5 1311,321.873 1311,328.5 L1311,390.5 C1311,397.127 1305.627,402.5 1299,402.5 L1186,402.5 C1179.373,402.5 1174,397.127 1174,390.5 L1174,328.5 C1174,321.873 1179.373,316.5 1186,316.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <text transform="matrix(1, 0, 0, 1, 1084.284, 363)">
+      <tspan x="-29.82" y="-7" font-family="HelveticaNeue" font-size="28" fill="#000000">scan</tspan>
+      <tspan x="-41.216" y="27" font-family="HelveticaNeue" font-size="28" fill="#000000">(users)</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 1160.5, 154)">
+      <tspan x="-22.036" y="10" font-family="HelveticaNeue" font-size="28" fill="#000000">join</tspan>
+    </text>
+    <text transform="matrix(1, 0, 0, 1, 1242, 363)">
+      <tspan x="-60.662" y="-7" font-family="HelveticaNeue" font-size="28" fill="#000000">filter scan</tspan>
+      <tspan x="-48.482" y="27" font-family="HelveticaNeue" font-size="28" fill="#000000">(events)</tspan>
+    </text>
+    <g>
+      <path d="M1108.5,316.5 L1153.946,210.769" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M1156.702,211.953 L1157.105,203.419 L1151.19,209.584 z" fill="#000000" fill-opacity="1" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <g>
+      <path d="M1209.5,316.5 L1166.868,210.846" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M1169.65,209.724 L1163.874,203.427 L1164.086,211.969 z" fill="#000000" fill-opacity="1" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 1160.5, 69.5)">
+      <tspan x="-92.05" y="-11" font-family="HelveticaNeue" font-size="28" fill="#000000">optimized plan</tspan>
+      <tspan x="-174.496" y="23" font-family="HelveticaNeue" font-size="28" fill="#000000">with intelligent data sources</tspan>
+    </text>
+  </g>
+  <g id="intelligent">
+    <text transform="matrix(1, 0, 0, 1, 1176.138, 485.5)">
+      <tspan x="-275.688" y="4.5" font-family="HelveticaNeue" font-size="20" fill="#FF0000">e.g.: SELECT * FROM events WHERE user_id = ___</tspan>
+    </text>
+    <path d="M1311,471.5 L1311,471.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <g>
+      <path d="M1326.974,396.993 C1351.224,410.482 1376.186,463.604 1339.5,481.5" fill-opacity="0" stroke="#FF0000" stroke-width="1"/>
+      <path d="M1327.978,394.166 L1319.436,394.315 L1325.97,399.82 z" fill="#FF0000" fill-opacity="1" stroke="#FF0000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 1108.05, 451)">
+      <tspan x="-202.45" y="7" font-family="HelveticaNeue" font-size="20" fill="#FF0000">Catalyst pushes the filter into the data source</tspan>
+    </text>
+  </g>
+</svg>
