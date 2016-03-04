@@ -4,18 +4,21 @@
   <div class="code">
     <pre>
       <code class="scala">
+// RDD
+val counts = words.groupBy(_.toLowerCase).map { case (w, all) => (w, all.size) }
+// Dataset
 val counts = words.groupBy(_.toLowerCase).count()
       </code>
     </pre>
   </div>
 
   <p>
-    The Dataset version can use the DataFrame API's built-in
+    The Dataset version can use the built-in DataFrame-like
     <code>count()</code> aggregator function.
   </p>
 
   <p class="fragment">
-    This code is more compact <i>and</i> will tend to execute faster than
-    the RDD counterpart.
+    The Dataset code is more visually compact (less typing! yay!)
+    <i>and</i> will tend to execute faster than the RDD counterpart.
   </p>
 </section>

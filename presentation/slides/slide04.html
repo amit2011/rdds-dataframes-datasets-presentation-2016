@@ -42,8 +42,17 @@
   </div>
 
   <aside class="notes">
-    The first <code>collect()</code> is the Scala collections version, a
-    <i>transformation</i> in Spark terms. The second <code>collect()</code>
-    is the Spark action.
+    <ul>
+      <li>
+        RDDs are essentially the Spark building block. Higher-level APIs, like
+        DataFrames, GraphX and Streaming, end up doing their work via RDDs,
+        even if they don't present RDDs directly to you.
+      </li>
+      <li>
+        The first <code>collect()</code> is the Scala collections version, a
+        <i>transformation</i> in Spark terms. The second <code>collect()</code>
+        is the Spark action.
+      </li>
+    </ul>
   </aside>
 </section>

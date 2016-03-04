@@ -5,7 +5,7 @@
 
 // Variables
 
-@code-font-size: 44px;
+@code-font-size: 54px;
 @code-font-size-small: 14px;
 @font-size: 78px;
 @footer-font-size: 20px;
@@ -92,6 +92,12 @@ body {
     width: 100%;
     left: 0;
     top: 0;
+  }
+}
+
+.speaker-controls-notes {
+  .value {
+    font-size: @font-size / 4 !important;
   }
 }
 
@@ -266,27 +272,30 @@ div.code {
   margin-bottom: 60px !important;
 }
 
-pre {
-  border: 1px solid transparent !important;
-  //background-color: #3f3f3f;
-  width: 100% !important;
-  box-shadow: 0 0 0 0 !important;
-  background-color: #1d1f21;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.reveal {
+  pre {
+    border: 1px solid transparent !important;
+    //background-color: #3f3f3f;
+    width: 100% !important;
+    height: auto !important;
+    box-shadow: 0 0 0 0 !important;
+    background-color: #1d1f21;
 
-  code {
-    padding-left: 30px !important;
-    padding-right: 30px !important;
-    font-family: @monospace-font-family !important;
-    font-size: @code-font-size !important;
-    max-height: 700px !important;
-    height: 100% !important;
-    line-height: 120% !important;
+    code {
+      padding-left: 30px !important;
+      padding-right: 30px !important;
+      padding-bottom: 0 !important;
+      padding-top: 0 !important;
+      font-family: @monospace-font-family !important;
+      font-size: @code-font-size !important;
+      max-height: 700px !important;
+      height: 100% !important;
+      line-height: 120% !important;
 
-    &.small {
-      font-size: @code-font-size-small;
-      line-height: 1.2;
+      &.small {
+        font-size: @code-font-size-small;
+        line-height: 1.2;
+      }
     }
   }
 }

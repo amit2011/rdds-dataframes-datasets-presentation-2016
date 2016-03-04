@@ -2,9 +2,7 @@
   <h1>But we've lost type safety</h1>
 
   <p>
-    Using the previous DataFrame (with <code>project</code>
-    and <code>numRequests</code>), what happens if we call
-    <code>collect()</code>?
+    What happens if we call the <code>collect()</code> action?
   </p>
 
   <div class="code">
@@ -30,8 +28,7 @@ Array[org.apache.spark.sql.Row]
 df.collect().map { row =>
   val project = row(0).asInstanceOf[String]   // Yuck.
   val numRequests = row(1).asInstanceOf[Long] // Yuck.
-}
-      </code>
+}</code>
     </pre>
   </div>
 </section>
