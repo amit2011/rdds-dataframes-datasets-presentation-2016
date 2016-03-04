@@ -19,7 +19,7 @@ val parsedRDD = rdd.flatMap { line =>
 parsedRDD.filter { case (project, numRequest) => project == "en" }.
           reduceByKey(_ + _).
           take(100).
-          foreach { case (page, requests) => println(s"$page: $requests") }
+          foreach { case (project, requests) => println(s"$project: $requests") }
       </code>
     </pre>
   </div>

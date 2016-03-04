@@ -18,8 +18,8 @@
         <code class="scala" data-trim>
 val df = parsedRDD.toDF("project", "numRequests")
 
-df.groupBy($"project").
-   agg(sum($"numRequests").as($"count")).
+df.groupBy($"page").
+   agg(sum($"numRequests").as("count")).
    limit(100).
    show(100)
         </code>

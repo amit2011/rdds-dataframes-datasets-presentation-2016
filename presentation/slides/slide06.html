@@ -26,7 +26,7 @@
 parsedRDD.reduceByKey(_ + _).                                       <span class="emphasis">&lt;--- INEFFICIENT</span>
           filter { case (project, numRequest) => project == "en" }. <span class="emphasis">&lt;--- ORDERING</span>
           take(100).
-          foreach { case (page, requests) => println(s"$page: $requests") }
+          foreach { case (project, requests) => println(s"project: $requests") }
     </code>
   </pre>
 
