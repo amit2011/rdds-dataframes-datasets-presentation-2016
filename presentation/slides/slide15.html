@@ -1,21 +1,19 @@
 <section>
-  <h1>Datasets and the DataFrame API</h1>
+  <h1>Enter Datasets</h1>
 
-  <div class="code">
-    <pre>
-      <code class="scala">
-val counts = words.groupBy(_.toLowerCase).count()
-      </code>
-    </pre>
-  </div>
+  <p>Like an RDD, Dataset has a <i>type</i>.</p>
 
-  <p>
-    The Dataset version can use the DataFrame API's built-in
-    <code>count()</code> aggregator function.
-  </p>
+  <pre class="fragment">
+    <code class="scala">
+// Read a DataFrame from a JSON file
+val df = sqlContext.read.json("people.json")
+// Convert the data to a domain object.
+case class Person(name: String, age: Long)
+val ds: Dataset[Person] = df.as[Person]
+    </code>
+  </pre>
 
   <p class="fragment">
-    This code is more compact <i>and</i> will tend to execute faster than
-    the RDD counterpart.
+    A DataFrame is just a <code>Dataset[Row]</code>.
   </p>
 </section>

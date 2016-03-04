@@ -1,33 +1,37 @@
 <section>
-  <h1>Enter Datasets</h1>
+  <h1>But we've lost type safety</h1>
 
-  <p>Datasets are:</p>
+  <p>
+    Using the previous DataFrame (with <code>project</code>
+    and <code>numRequests</code>), what happens if we call
+    <code>collect()</code>?
+  </p>
 
-  <ul>
-    <li class="fragment">
-      An extension to the DataFrame API
-    </li>
-    <li class="fragment">
-      Conceptually similar to RDDs<span class="fragment">.
-      <span class="emphasis">(You can use lambdas and types again.)</span>
-      </span>
-    </li>
-    <li class="fragment">
-      Use Tungsten's fast in-memory encoding (as opposed to JVM objects or
-      serialized objects on the heap)
-    </li>
-    <li class="fragment">
-      Expose expressions and fields to the DataFrame query planner, where
-      the optimizer can use them to make decisions<span class="fragment">.
-      (This can't happen with RDDs.)</span>
-    </li>
-    <li class="fragment">
-      Interoperate more easily with the DataFrame API
-    </li>
-    <li class="fragment">
-      Available in Spark 1.6 as an API preview<span class="fragment">.
-      (They're a development focus for the next several Spark versions.)</span>
-    </li>
-  </ul>
+  <div class="code">
+    <pre>
+      <code class="scala">
+scala> :type df.collect()
+Array[org.apache.spark.sql.Row]
+      </code>
+    </pre>
+  </div>
 
+  <p>
+    Unfortunately, <code>Row</code> isn't typesafe. It's defined as<br/>
+    <code class="scala indented">trait Row extends Serializable</code>
+  </p>
+  <p>
+    Mapping it back to something useful is ugly and error-prone:
+  </p>
+
+  <div class="code">
+    <pre>
+      <code class="scala" data-trim>
+df.collect().map { row =>
+  val project = row(0).asInstanceOf[String]   // Yuck.
+  val numRequests = row(1).asInstanceOf[Long] // Yuck.
+}
+      </code>
+    </pre>
+  </div>
 </section>

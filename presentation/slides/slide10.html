@@ -1,7 +1,15 @@
 <section>
-  <h1>DataFrames are faster</h1>
+  <h1>Example Optimization</h1>
 
-  <p class="centered">Because of the optimization, they tend to outperform RDDs.</p>
+  <pre>
+    <code>
+      users.join(events, users("id") === events("uid"))
+           .filter(events("date") > "2015-01-01")
+    </code>
+  </pre>
 
-  <img class="stretch" src="images/dataframe-performance.png"/>
+  <div class="fragment">
+    %include "../../tmp/dataframe-optimization.svg"
+  </div>
+
 </section>

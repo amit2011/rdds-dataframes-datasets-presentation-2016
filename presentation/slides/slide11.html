@@ -1,37 +1,7 @@
 <section>
-  <h1>But we've lost type safety</h1>
+  <h1>DataFrames are faster</h1>
 
-  <p>
-    Using the previous DataFrame (with <code>project</code>
-    and <code>numRequests</code>), what happens if we call
-    <code>collect()</code>?
-  </p>
+  <p class="centered">Because of the optimization, they tend to outperform RDDs.</p>
 
-  <div class="code">
-    <pre>
-      <code class="scala">
-scala> :type df.collect()
-Array[org.apache.spark.sql.Row]
-      </code>
-    </pre>
-  </div>
-
-  <p>
-    Unfortunately, <code>Row</code> isn't typesafe. It's defined as<br/>
-    <code class="scala indented">trait Row extends Serializable</code>
-  </p>
-  <p>
-    Mapping it back to something useful is ugly and error-prone:
-  </p>
-
-  <div class="code">
-    <pre>
-      <code class="scala" data-trim>
-df.collect().map { row =>
-  val project = row(0).asInstanceOf[String]   // Yuck.
-  val numRequests = row(1).asInstanceOf[Long] // Yuck.
-}
-      </code>
-    </pre>
-  </div>
+  <img class="stretch" src="images/dataframe-performance.png"/>
 </section>
