@@ -1,7 +1,8 @@
 # RDDs, DataFrames and Datasets in Apache Spark
 
 This repo contains the source for my 2016 [Northeast Scala Symposium][] talk,
-_RDDs, DataFrames and Datasets in Apache Spark_.
+_RDDs, DataFrames and Datasets in Apache Spark_. You can see the actual
+deck, in action, [here](https://www.ardentex.com/publications/RDDs-DataFrames-and-Datasets-in-Apache-Spark/).
 
 The presentation is in [presentation](presentation). The source to the demo
 is in [demo](demo).
