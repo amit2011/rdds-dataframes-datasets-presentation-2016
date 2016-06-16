@@ -1,27 +1,38 @@
 <section>
-  <h1>RDDs: Some code</h1>
+  <h1>RDDs</h1>
 
   <p>
-    This blob of code creates an RDD from a file on a distributed file system.
+    RDDs are type-safe. However, they're also low-level, and they suffer from
+    some problems, including:
   </p>
 
-  <div class="code">
-    <pre>
-      <code class="scala" data-trim>
-val rdd = sc.textFile("hdfs:/user/bmc/wikipedia-pagecounts.gz")
-val parsedRDD = rdd.flatMap { line =>
-  line.split("""\s+""") match {
-    case Array(project, _, numRequests, _) => Some((project, numRequests))
-    case _ => None
-  }
-}
+  <ul>
+    <li class="fragment" data-fragment-index="1">
+      They express the <i>how</i> of a solution better than the <i>what</i>.
+    </li>
+    <li class="fragment" data-fragment-index="2">
+      They cannot be optimized by Spark.
+    </li>
+    <li class="fragment" data-fragment-index="3">
+      They're <i>slow</i> on non-JVM languages like Python.
+    </li>
+    <li class="fragment" data-fragment-index="4">
+      It's too easy to build an inefficient RDD transformation chain.
+    </li>
+  </ul>
 
-parsedRDD.filter { case (project, numRequest) => project == "en" }.
-          reduceByKey(_ + _).
+  <pre class="fragment" data-fragment-index="4">
+    <code class="scala">
+parsedRDD.reduceByKey(_ + _).                                       <span class="emphasis">&lt;--- INEFFICIENT</span>
+          filter { case (project, numRequest) => project == "en" }. <span class="emphasis">&lt;--- ORDERING</span>
           take(100).
-          foreach { case (project, requests) => println(s"$project: $requests") }
-      </code>
-    </pre>
-  </div>
+          foreach { case (project, requests) => println(s"project: $requests") }
+    </code>
+  </pre>
+
+  <aside class="notes">
+    Put the `take()` after the sort, for instance, and you will really
+    slow things down.
+  </aside>
 
 </section>

@@ -1,25 +1,5 @@
 <section>
-  <h1>Datasets and Memory</h1>
+  <h1>Space Efficiency</h1>
 
-  <p>Datasets tend to use less memory.</p>
-
-  <ul>
-    <li class="fragment">
-      Spark understands the structure of data in Datasets, because they're
-      <i>typed</i>.
-    </li>
-    <li class="fragment">
-      Spark uses <i>encoders</i> to translate between these types ("domain
-      objects") and Spark's compact internal Tungsten data format.
-    </li>
-    <li class="fragment">
-      It generates these encoders via runtime code-generation. The
-      generated code can operate <i>directly</i> on the Tungsten compact
-      format.
-    </li>
-    <li class="fragment">
-      Memory is conserved, because of the compact format. Speed is improved by
-      custom code-generation.
-    </li>
-  </ul>
+  <img src="images/datasets-caching.png"/>
 </section>

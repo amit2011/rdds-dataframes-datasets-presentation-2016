@@ -10,8 +10,8 @@
 @font-size: 78px;
 @footer-font-size: 20px;
 @font-weight: 300;
-@font-family: "Open Sans", "Source Sans Pro", sans-serif;
-@header-font-family: "Droid Serif", "Adobe Garamond", serif;
+@font-family: "Source Sans Pro", sans-serif;
+@header-font-family: "Newslab", serif;
 @monospace-font-family: Consolas, Menlo, monospace;
 
 // Coupled to presentation.js
@@ -55,15 +55,15 @@ html {
       text-align: center;
 
       h1, h2, h3 {
-        color: black !important;
-        //color: black !important;
+        color: white !important;
         vertical-align: bottom;
         text-align: center !important;
+        fond-weight: normal !important;
       }
 
-      p.attribution {
+      p {
+        color: white !important;
         padding-top: 50px;
-        color: black !important;
         text-align: center;
       }
     }
@@ -162,6 +162,13 @@ section {
   width: 100%;
   font-size: @footer-font-size;
 
+  .databricks {
+    font-family: @header-font-family;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+
   .nescala-logo {
     position: absolute;
     bottom: 10px;
@@ -203,11 +210,17 @@ p {
 
 ul {
   margin-left: 20px !important;
-}
 
-li {
-  font-size: @font-size !important;
-  line-height: 130% !important;
+  li {
+    font-size: @font-size !important;
+    line-height: 130% !important;
+
+    ul {
+      li {
+        margin-left: 40px !important;
+      }
+    }
+  }
 }
 
 p.centered {

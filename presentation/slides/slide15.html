@@ -1,19 +1,32 @@
 <section>
-  <h1>Enter Datasets</h1>
+  <h1>Datasets: A bit of both</h1>
 
-  <p>Like an RDD, Dataset has a <i>type</i>.</p>
-
-  <pre class="fragment">
-    <code class="scala">
-// Read a DataFrame from a JSON file
-val df = sqlContext.read.json("people.json")
-// Convert the data to a domain object.
-case class Person(name: String, age: Long)
-val ds: Dataset[Person] = df.as[Person]
-    </code>
-  </pre>
-
-  <p class="fragment">
-    A DataFrame is just a <code>Dataset[Row]</code>.
+  <p>
+    With Datasets, you can still access a DataFrame-like query API.
+    (You can also go back and forth between DataFrames and Datasets.)
   </p>
+
+  <p>RDDs:</p>
+
+  <div class="code">
+    <pre>
+      <code class="scala">
+val lines = sc.textFile("hdfs://path/to/some/ebook.txt")
+val words = lines.flatMap(_.split("""\s+""")).filter(_.nonEmpty)
+val counts = words.groupBy(_.toLowerCase).map { case (w, all) => (w, all.size) }
+      </code>
+    </pre>
+  </div>
+
+  <p>Datasets:</p>
+
+  <div class="code">
+    <pre>
+      <code class="scala">
+val lines = sqlContext.read.text("hdfs://path/to/some/ebook.txt").as[String]
+val words = lines.flatMap(_.split("""\s+""")).filter(_.nonEmpty)
+val counts = words.groupByKey(_.toLowerCase).count()
+      </code>
+    </pre>
+  </div>
 </section>

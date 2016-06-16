@@ -1,34 +1,7 @@
 <section>
-  <h1>But we've lost type safety</h1>
-
-  <p>
-    What happens if we call the <code>collect()</code> action?
-  </p>
-
-  <div class="code">
-    <pre>
-      <code class="scala">
-scala> :type df.collect()
-Array[org.apache.spark.sql.Row]
-      </code>
-    </pre>
-  </div>
-
-  <p>
-    Unfortunately, <code>Row</code> isn't typesafe. It's defined as<br/>
-    <code class="scala indented">trait Row extends Serializable</code>
-  </p>
-  <p>
-    Mapping it back to something useful is ugly and error-prone:
-  </p>
-
-  <div class="code">
-    <pre>
-      <code class="scala" data-trim>
-df.collect().map { row =>
-  val project = row(0).asInstanceOf[String]   // Yuck.
-  val numRequests = row(1).asInstanceOf[Long] // Yuck.
-}</code>
-    </pre>
+  <h1>What do we want?</h1>
+  <div>
+    We'd like to get back our compile-time type safety, <i>without</i>
+    giving up the optimizations Catalyst can provide us.
   </div>
 </section>

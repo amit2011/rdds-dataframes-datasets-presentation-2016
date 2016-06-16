@@ -1,9 +1,15 @@
 <section>
-  <h1>DataFrame queries are optimized</h1>
+  <h1>Example Optimization</h1>
 
-  <div class="svg-image">
-    %include "../../tmp/df-optimization.svg"
+  <pre>
+    <code>
+      users.join(events, users("id") === events("uid"))
+           .filter(events("date") > "2015-01-01")
+    </code>
+  </pre>
+
+  <div class="fragment">
+    %include "../../tmp/dataframe-optimization.svg"
   </div>
-
 
 </section>

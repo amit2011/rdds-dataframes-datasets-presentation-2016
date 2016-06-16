@@ -1,34 +1,20 @@
 <section>
   <h1>Enter Datasets</h1>
 
-  <p>Datasets are:</p>
+  <p>Like an RDD, Dataset has a <i>type</i>.</p>
 
-  <ul>
-    <li class="fragment">
-      An extension to the DataFrame API
-    </li>
-    <li class="fragment">
-      Conceptually similar to RDDs<span class="fragment">.
-      <span class="emphasis">(You can use lambdas and types again.)</span>
-      </span>
-    </li>
-    <li class="fragment">
-      Use Tungsten's fast in-memory encoding (as opposed to JVM objects or
-      serialized objects on the heap)
-    </li>
-    <li class="fragment">
-      Expose expressions and fields to the DataFrame query planner, where
-      the optimizer can use them to make decisions<span class="fragment">.
-      (This can't happen with RDDs.)</span>
-    </li>
-    <li class="fragment">
-      Interoperate more easily with the DataFrame API
-    </li>
-    <li class="fragment">
-      Available in Spark 1.6 as an <strong>experimental</strong> API
-      preview<span class="fragment">. (They're a development focus for the
-      next several Spark versions.)</span>
-    </li>
-  </ul>
+  <pre class="fragment">
+    <code class="scala">
+// Read a DataFrame from a JSON file
+val df = sqlContext.read.json("people.json")
+// Convert the data to a domain object.
+case class Person(name: String, age: Long)
+val ds: Dataset[Person] = df.as[Person]
+//                          |----------|
+    </code>
+  </pre>
 
+  <p class="fragment">
+    In Spark 2.0, a DataFrame is just a <code>Dataset[Row]</code>.
+  </p>
 </section>

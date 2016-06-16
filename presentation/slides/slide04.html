@@ -1,58 +1,27 @@
 <section>
+  <h1>RDDs: Some code</h1>
 
-  <h1>RDDs are...</h1>
-
-  <p class="fragment">
-    ... compile-time type-safe
+  <p>
+    This blob of code creates an RDD from a file on a distributed file system.
   </p>
 
-  <p class="fragment">
-    ... lazy.
-  </p>
+  <div class="code">
+    <pre>
+      <code class="scala" data-trim>
+val rdd = sc.textFile("hdfs:/user/bmc/wikipedia-pagecounts.gz")
+val parsedRDD = rdd.flatMap { line =>
+  line.split("""\s+""") match {
+    case Array(project, _, numRequests, _) => Some((project, numRequests))
+    case _ => None
+  }
+}
 
-  <p class="fragment">
-    ... based on the Scala collections API, so the operations are familiar
-    to Scala programmers.
-  </p>
-
-  <div class="fragment">
-    <p>
-      <i>So much so, in fact, that it can be confusing to new users:</i>
-    </p>
-
-    <div class="scaladoc">
-      <div class="scaladoc-chunk">
-        <div class="function">
-          def <span class="name">collect</span>[U](f: PartialFunction[T, U])(<i>implicit</i> arg0: ClassTag[U]): RDD[U]
-        </div>
-        <p class="description">
-          Return a new RDD that contains all matching values by applying <code>f</code>.
-        </p>
-      </div>
-      <hr/>
-      <div class="scaladoc-chunk">
-        <div class="function">
-          def <span class="name">collect</span>(): Array[T]
-        </div>
-        <p class="description">
-          Return an array that contains all of the elements in this RDD.
-        </p>
-      </div>
-    </div>
+parsedRDD.filter { case (project, numRequest) => project == "en" }.
+          reduceByKey(_ + _).
+          take(100).
+          foreach { case (project, requests) => println(s"$project: $requests") }
+      </code>
+    </pre>
   </div>
 
-  <aside class="notes">
-    <ul>
-      <li>
-        RDDs are essentially the Spark building block. Higher-level APIs, like
-        DataFrames, GraphX and Streaming, end up doing their work via RDDs,
-        even if they don't present RDDs directly to you.
-      </li>
-      <li>
-        The first <code>collect()</code> is the Scala collections version, a
-        <i>transformation</i> in Spark terms. The second <code>collect()</code>
-        is the Spark action.
-      </li>
-    </ul>
-  </aside>
 </section>

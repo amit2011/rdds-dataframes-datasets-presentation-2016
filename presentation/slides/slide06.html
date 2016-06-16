@@ -1,38 +1,29 @@
-<section>
-  <h1>RDDs</h1>
+ <section>
+  <h1>The DataFrame API</h1>
 
   <p>
-    RDDs are type-safe. However, they're also low-level, and they suffer from
-    some problems, including:
+    The DataFrame API provides a higher-level abstraction (a DSL, really),
+    allowing you to use a query language to manipulate data. In fact, you
+    can use SQL, as well.
   </p>
 
-  <ul>
-    <li class="fragment" data-fragment-index="1">
-      They express the <i>how</i> of a solution better than the <i>what</i>.
-    </li>
-    <li class="fragment" data-fragment-index="2">
-      They cannot be optimized by Spark.
-    </li>
-    <li class="fragment" data-fragment-index="3">
-      They're <i>slow</i> on non-JVM languages like Python.
-    </li>
-    <li class="fragment" data-fragment-index="4">
-      It's too easy to build an inefficient RDD transformation chain.
-    </li>
-  </ul>
+  <div class="fragment">
+    <p>
+      This code does essentially the same thing the previous RDD code does.
+      Look how much easier it is to read.
+    </p>
 
-  <pre class="fragment" data-fragment-index="4">
-    <code class="scala">
-parsedRDD.reduceByKey(_ + _).                                       <span class="emphasis">&lt;--- INEFFICIENT</span>
-          filter { case (project, numRequest) => project == "en" }. <span class="emphasis">&lt;--- ORDERING</span>
-          take(100).
-          foreach { case (project, requests) => println(s"project: $requests") }
-    </code>
-  </pre>
+    <div class="code">
+      <pre>
+        <code class="scala" data-trim>
+val df = parsedRDD.toDF("project", "numRequests")
 
-  <aside class="notes">
-    Put the `take()` after the sort, for instance, and you will really
-    slow things down.
-  </aside>
-
+df.groupBy($"page").
+   agg(sum($"numRequests").as("count")).
+   limit(100).
+   show(100)
+        </code>
+      </pre>
+    </div>
+  </div>
 </section>

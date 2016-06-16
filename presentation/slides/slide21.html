@@ -1,6 +1,30 @@
 <section>
-  <h1>Datasets and Serialization</h1>
+  <h1>Some Dataset Limitations</h1>
 
-  <img class="stretch" src="images/datasets-serde-perf-chart.png"/>
-
+  <ul>
+    <li class="fragment">
+      They're not especially useful for Python.
+    </li>
+    <li class="fragment">
+      They can still be slower than DataFrames (because of the lambdas).
+    </li>
+    <li class="fragment">
+      In some cases, RDD lambdas may still be faster than the equivalent
+      Dataset lambda.
+      <ul>
+        <li class="fragment">
+          If the JVM isn't garbage-collecting, then RDDs might be faster,
+          because they operate directly on JVM objects. Once the JVM starts GC,
+          though, Dataset lambdas will tend to be faster (because the data
+          lives outside the heap).
+        </li>
+        <li class="fragment">
+          (The Spark developers think they can fix this problem.)
+        </li>
+      </ul>
+    </li>
+    <li class="fragment">
+      The term "Datasets" is kind of hard to Google...
+    </li>
+  </ul>
 </section>
