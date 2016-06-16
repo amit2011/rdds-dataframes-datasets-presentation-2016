@@ -40,25 +40,22 @@
 html {
 
 
-  &.initial-slide {
-    .no-footer;
-    .no-slide-number;
-  }
-
   &.title-slide {
     .no-footer;
     .no-slide-number;
 
     section {
-      background: transparent;
-      padding: 30px;
-      text-align: center;
+      .title {
+        background-color: rbga(255, 255, 255, 60%) !important;
+        padding: 30px;
+        text-align: center;
+      }
 
       h1, h2, h3 {
         color: white !important;
         vertical-align: bottom;
         text-align: center !important;
-        fond-weight: normal !important;
+        font-weight: normal !important;
       }
 
       p {

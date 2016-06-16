@@ -1,4 +1,4 @@
-// Databricks notebook source exported at Thu, 16 Jun 2016 19:19:35 UTC
+// Databricks notebook source exported at Thu, 16 Jun 2016 20:18:02 UTC
 // MAGIC %md 
 // MAGIC # Download the Wikipedia Pagecounts Data File
 // MAGIC 

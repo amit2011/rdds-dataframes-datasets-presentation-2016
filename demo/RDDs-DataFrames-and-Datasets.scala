@@ -1,4 +1,4 @@
-// Databricks notebook source exported at Thu, 16 Jun 2016 19:19:45 UTC
+// Databricks notebook source exported at Thu, 16 Jun 2016 20:18:05 UTC
 // MAGIC %md
 // MAGIC 
 // MAGIC #![Wikipedia Logo](http://sameerf-dbc-labs.s3-website-us-west-2.amazonaws.com/data/wikipedia/images/w_logo_for_labs.png)
@@ -107,7 +107,7 @@ pagecountsRDD2.take(10).foreach(println)
 
 // COMMAND ----------
 
-// MAGIC %md Let's sum up the request counts per page in the English Wikipiedia, then pull back the top 10. This is a variation of the code on Slide 5.
+// MAGIC %md Let's sum up the request counts per page in the English Wikipiedia, then pull back the top 10. This is a variation of the code on Slide 4.
 // MAGIC   
 
 // COMMAND ----------
@@ -244,7 +244,7 @@ pagecountsDFParquet.rdd.partitions.length
 
 // COMMAND ----------
 
-// MAGIC %md Let's get rid of the special pages, as we did with the RDD version. This is an adaptation of what's on Slide 7.
+// MAGIC %md Let's get rid of the special pages, as we did with the RDD version. 
 
 // COMMAND ----------
 
