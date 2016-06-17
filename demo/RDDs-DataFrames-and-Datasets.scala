@@ -1,4 +1,4 @@
-// Databricks notebook source exported at Thu, 16 Jun 2016 20:18:05 UTC
+// Databricks notebook source exported at Fri, 17 Jun 2016 13:27:46 UTC
 // MAGIC %md
 // MAGIC 
 // MAGIC #![Wikipedia Logo](http://sameerf-dbc-labs.s3-website-us-west-2.amazonaws.com/data/wikipedia/images/w_logo_for_labs.png)
@@ -185,8 +185,8 @@ pagecountsRDD3.take(100).foreach { case (page, totalRequests) => println(s"$page
 // COMMAND ----------
 
 pagecountsRDD3.setName("pagecountsRDD2").cache()
-val total = pagecountsRDD3.count() // we need to run an action to fill the cache
-println(fmt.format(total))
+val totalPagesRDD = pagecountsRDD3.count() // we need to run an action to fill the cache
+println(fmt.format(totalPagesRDD))
 
 // COMMAND ----------
 
@@ -214,6 +214,10 @@ object Parser extends Serializable { // This helps with scoping issues in the no
 val pagecountsDF = pagecountsRDD2.flatMap(Parser.parseLine).toDF
   
 
+
+// COMMAND ----------
+
+pagecountsDF.printSchema()
 
 // COMMAND ----------
 
@@ -317,11 +321,16 @@ first10Rows.map { row =>
 
 // COMMAND ----------
 
-// MAGIC %md Before we move on to Datasets, let's cache the DataFrame and compare the cached size to the cached size of the RDD.
+// MAGIC %md Before we move on to Datasets, let's:
+// MAGIC * verify that the number of items in the DataFrame match the RDD with the special pages filtered out
+// MAGIC * cache the DataFrame 
+// MAGIC * compare the cached size to the cached size of the RDD.
 
 // COMMAND ----------
 
-pagecountsDF2.cache().count()
+val totalPagesDF = pagecountsDF2.cache().count()
+println(s"RDD total: ${fmt.format(totalPagesRDD)}")
+println(s"DF total:  ${fmt.format(totalPagesDF)}")
 
 // COMMAND ----------
 
@@ -370,7 +379,7 @@ pagecountsDS3.take(4).foreach(println)
 
 // COMMAND ----------
 
-pagecountsDS3.count()
+println(fmt.format(pagecountsDS3.count()))
 
 // COMMAND ----------
 
@@ -386,10 +395,12 @@ pagecountsDF.getClass
 // COMMAND ----------
 
 // MAGIC %md You still have to get the types right on the conversions to Datasets, but once you have the Dataset, you have something that's type safe again. 
+// MAGIC 
+// MAGIC Once again, let's filter out the special pages, group by page title, and show to top 100 hits.
 
 // COMMAND ----------
 
-val pagecountsDS4 = pagecountsDS3.filter { e => (e.project == "en") && (! e.pageTitle.contains(":")) && (! isSpecialPage(e.pageTitle)) }.
+val pagecountsDS4 = pagecountsDS3.filter { e => (e.project == "en") && (! e.pageTitle.startsWith(".")) && (! isSpecialPage(e.pageTitle)) }.
                                   groupByKey { _.pageTitle }.  // GroupedDataset[String, DSEntry]
                                   reduceGroups { (e1, e2) => e1.copy(e1.project, e1.pageTitle, e1.numberOfRequests + e2.numberOfRequests) }.
                                   map(_._2). // skip the key; extract the value
@@ -400,11 +411,18 @@ pagecountsDS4.take(100).foreach { e => println(s"${e.pageTitle}: ${e.numberOfReq
 
 // COMMAND ----------
 
-// MAGIC %md Let's cache this final Dataset, for comparison with the cached DataFrame and the cached RDD.
+// MAGIC %md Let's cache this Dataset and, for good measure, compare the number of items with our RDD and DataFrame.
 
 // COMMAND ----------
 
-println(fmt.format(pagecountsDS4.cache().count()))
+val totalPagesDS = pagecountsDS4.cache().count()
+println(s"DF total:  ${fmt.format(totalPagesDF)}")
+println(s"RDD total: ${fmt.format(totalPagesRDD)}")
+println(s"DS total:  ${fmt.format(totalPagesDS)}")
+
+// COMMAND ----------
+
+pagecountsDS4.rdd.partitions.length
 
 // COMMAND ----------
 
@@ -429,7 +447,8 @@ val pagecountsEditRDD = pagecountsRDD2.flatMap { line =>
     case Array(project, pageTitle, requests, _) => Some(Edit(project, pageTitle, requests.toLong))
     case _ => None
   }
-}
+}.
+filter { e => (e.project == "en") && (! e.pageTitle.startsWith(".")) && (! isSpecialPage(e.pageTitle)) }
 pagecountsEditRDD.setName("pagecountsEditRDD").persist(StorageLevel.MEMORY_AND_DISK).count()
 
 // COMMAND ----------
