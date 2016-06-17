@@ -1,4 +1,4 @@
-// Databricks notebook source exported at Fri, 17 Jun 2016 13:27:46 UTC
+// Databricks notebook source exported at Fri, 17 Jun 2016 15:16:21 UTC
 // MAGIC %md
 // MAGIC 
 // MAGIC #![Wikipedia Logo](http://sameerf-dbc-labs.s3-website-us-west-2.amazonaws.com/data/wikipedia/images/w_logo_for_labs.png)
@@ -184,7 +184,7 @@ pagecountsRDD3.take(100).foreach { case (page, totalRequests) => println(s"$page
 
 // COMMAND ----------
 
-pagecountsRDD3.setName("pagecountsRDD2").cache()
+pagecountsRDD3.setName("pagecountsRDD3").cache()
 val totalPagesRDD = pagecountsRDD3.count() // we need to run an action to fill the cache
 println(fmt.format(totalPagesRDD))
 
