@@ -1,11 +1,24 @@
 # RDDs, DataFrames and Datasets in Apache Spark
 
 This repo contains the source for my 2016 [Northeast Scala Symposium][] talk,
-_RDDs, DataFrames and Datasets in Apache Spark_. You can see the actual
-deck, in action, [here](https://www.ardentex.com/publications/RDDs-DataFrames-and-Datasets-in-Apache-Spark/).
+_RDDs, DataFrames and Datasets in Apache Spark_, which I updated (a little)
+for Apache Spark 2.0 and gave again at a Philly Area Scala Enthusiasts (PHASE)
+Meetup in June, 2016 (<http://www.meetup.com/scala-phase/events/229870987/>).
 
-The presentation is in [presentation](presentation). The source to the demo
-is in [demo](demo).
+You can see the actual deck, in action, 
+[here](http://scala-phase.org/talks/rdds-dataframes-datasets-2016-06-16).
+
+The Git tag `nescala` captures the code and presentation as given at
+the Northeast Scala Symposium.
+
+The tag `phase` captures the code and presentation as given at the PHASE
+Meetup.
+
+The presentation is in [presentation](presentation). The demo notebooks
+are in [demo](demo), in runnable source form. Also in [demo](demo) is a
+file called `notebooks.dbc`, which can be loaded directly into Databricks.
+Feel free to sign up for the free
+[Databricks Community Edition](http://databricks.com/ce/) and try them yourself.
 
 The presentation is built with [Reveal.js][], augmented with some custom
 build code. To build the presentation, you can run `rake` from the top level.
