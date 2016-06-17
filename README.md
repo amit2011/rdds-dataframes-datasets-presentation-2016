@@ -5,8 +5,11 @@ _RDDs, DataFrames and Datasets in Apache Spark_, which I updated (a little)
 for Apache Spark 2.0 and gave again at a Philly Area Scala Enthusiasts (PHASE)
 Meetup in June, 2016 (<http://www.meetup.com/scala-phase/events/229870987/>).
 
-You can see the actual deck, in action, 
+**Slides*: You can see the actual deck, in action, 
 [here](http://scala-phase.org/talks/rdds-dataframes-datasets-2016-06-16).
+
+**Video**: The talk at the Northeast Scala Symposium was recorded. The
+video is [here](https://www.youtube.com/watch?v=pZQsDloGB4w)
 
 The Git tag `nescala` captures the code and presentation as given at
 the Northeast Scala Symposium.
