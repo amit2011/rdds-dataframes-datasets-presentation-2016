@@ -11,15 +11,16 @@
 val rdd = sc.textFile("hdfs:/user/bmc/wikipedia-pagecounts.gz")
 val parsedRDD = rdd.flatMap { line =>
   line.split("""\s+""") match {
-    case Array(project, _, numRequests, _) => Some((project, numRequests))
+    case Array(project, page, numRequests, _) => Some((project, page, numRequests))
     case _ => None
   }
 }
 
-parsedRDD.filter { case (project, numRequest) => project == "en" }.
+parsedRDD.filter { case (project, page, numRequests) => project == "en" }.
+          map { case (_, page, numRequests) => (page, numRequests) }.
           reduceByKey(_ + _).
           take(100).
-          foreach { case (project, requests) => println(s"$project: $requests") }
+          foreach { case (page, requests) => println(s"$page: $requests") }
       </code>
     </pre>
   </div>

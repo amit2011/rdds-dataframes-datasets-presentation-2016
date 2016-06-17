@@ -16,9 +16,10 @@
     <div class="code">
       <pre>
         <code class="scala" data-trim>
-val df = parsedRDD.toDF("project", "numRequests")
+val df = parsedRDD.toDF("project", "page", "numRequests")
 
-df.groupBy($"page").
+df.filter($"project" === "en").
+   groupBy($"page").
    agg(sum($"numRequests").as("count")).
    limit(100).
    show(100)

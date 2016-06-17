@@ -10,7 +10,9 @@
     <pre>
       <code class="scala">
 df.registerTempTable("edits")
-sqlContext.sql("SELECT project, sum(numRequests) AS count FROM edits LIMIT 100")
+sqlContext.sql("""|SELECT page, sum(numRequests) AS count FROM edits
+                  |WHERE project = 'en'
+                  |GROUP BY page LIMIT 100""".stripMargin)
           .show(100)
       </code>
     </pre>

@@ -23,8 +23,10 @@
 
   <pre class="fragment" data-fragment-index="4">
     <code class="scala">
-parsedRDD.reduceByKey(_ + _).                                       <span class="emphasis">&lt;--- INEFFICIENT</span>
-          filter { case (project, numRequest) => project == "en" }. <span class="emphasis">&lt;--- ORDERING</span>
+parsedRDD.filter { case (project, page, numRequests) => project == "en" }.
+          map { case (_, page, numRequests) => (page, numRequests) }.
+          reduceByKey(_ + _).                                 <span class="emphasis">&lt;--- INEFFICIENT </span>
+          filter { case (page, _) => ! isSpecialPage(page) }. <span class="emphasis">&lt;--- ORDERING</span>
           take(100).
           foreach { case (project, requests) => println(s"project: $requests") }
     </code>
