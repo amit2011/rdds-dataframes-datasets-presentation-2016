@@ -1,4 +1,4 @@
-// Databricks notebook source exported at Fri, 17 Jun 2016 15:16:21 UTC
+// Databricks notebook source exported at Wed, 31 Aug 2016 00:07:54 UTC
 // MAGIC %md
 // MAGIC 
 // MAGIC #![Wikipedia Logo](http://sameerf-dbc-labs.s3-website-us-west-2.amazonaws.com/data/wikipedia/images/w_logo_for_labs.png)
@@ -21,13 +21,19 @@
 
 // COMMAND ----------
 
-val dirContents = dbutils.fs.ls("dbfs:/tmp/pagecounts")
-val size = dirContents.map(_.size).head / (1024 * 1024)
-println(s"$size megabytes\n")
+// For some reason, if this is outside a local block, some of the RDD transformation lambdas
+// pick up the global dirContents variable, even though they don't reference it. Since the
+// type of dirContents isn't serializable, a lambda that picks it up fails. Putting the code
+// inside a local block solves the problem.
+{ 
+  val dirContents = dbutils.fs.ls("dbfs:/tmp/pagecounts")
+  val size = dirContents.map(_.size).head / (1024 * 1024)
+  println(s"$size megabytes\n")
+}
 
 // COMMAND ----------
 
-val path = dirContents.sortWith { (a, b) => a.name > b.name }.head.path
+val path = dbutils.fs.ls("dbfs:/tmp/pagecounts").sortWith { (a, b) => a.name > b.name }.head.path
 
 // COMMAND ----------
 
@@ -131,37 +137,45 @@ foreach { case (page, totalRequests) => println(s"$page: $totalRequests") }
 
 // COMMAND ----------
 
-val Specials = Set(
-  """Category:""".r,
-  """Media:""".r,
-  """MediaWiki:""".r,
-  """Template:""".r,
-  """\s+talk:""".r,
-  """Help talk:""".r,
-  """User:""".r,
-  """Talk:""".r,
-  """Help:""".r,
-  """File""".r,
-  """Special:""".r
+val SkipPages = Array(
+  """^Special:""".r,
+  """^File:""".r,
+  """^Category:""".r,
+  """^User:""".r,
+  """^Talk:""".r,
+  """^Template:""".r,
+  """^Help:""".r,
+  """^Wikipedia:""".r,
+  """^MediaWiki:""".r,
+  """^Portal:""".r,
+  """^Book:""".r,
+  """^Draft:""".r,
+  """^Education_Program:""".r,
+  """^TimedText:""".r,
+  """^Module:""".r,
+  """^Topic:""".r,
+  """^Images/""".r,
+  """^%22//upload.wikimedia.org""".r,
+  """^%22//en.wikipedia.org""".r
 )
-def isSpecialPage(pageTitle: String): Boolean = Specials exists { r => r.findFirstIn(pageTitle).isDefined }
+
+def isSpecialPage(pageTitle: String): Boolean = SkipPages.exists { r => r.findFirstIn(pageTitle).isDefined }
 
 // COMMAND ----------
 
-val pagecountsRDD3 = pagecountsRDD2.flatMap { line =>
+def keepPage(page: String) = (! page.startsWith(".")) && (! isSpecialPage(page))
+val pagecountsRDD3 =
+  pagecountsRDD2.flatMap { line =>
   line.split("""\s+""") match {
-    case Array(project, page, numRequests, contentSize) => Some((project, page, numRequests.toLong))
+    case Array(project, page, numRequests, contentSize) if (project == "en") && keepPage(page) => Some((page, numRequests.toLong))
     case _ => None
   }
 }.
-filter { case (project, page, numRequests) => 
-  (project == "en") && (! page.startsWith(".")) && (! isSpecialPage(page))
-}.
-map { case (project, page, numRequests) => (page, numRequests) }.
 reduceByKey(_ + _).
 sortBy({ case (page, numRequests) => numRequests }, ascending = false)
 
 pagecountsRDD3.take(100).foreach { case (page, totalRequests) => println(s"$page: $totalRequests") }
+
 
 // COMMAND ----------
 
@@ -254,10 +268,10 @@ pagecountsDFParquet.rdd.partitions.length
 
 import org.apache.spark.sql.functions._
 
-val uIsSpecialPage = sqlContext.udf.register("isSpecialPage", isSpecialPage _)
+val uKeepPage = sqlContext.udf.register("keepPage", keepPage _)
 
 val pagecountsDF2 = pagecountsDF.filter($"project" === "en").
-                                 filter(! uIsSpecialPage($"pageTitle")).
+                                 filter(uKeepPage($"pageTitle")).
                                  filter(substring($"pageTitle", 0, 1) !== ".").
                                  groupBy($"pageTitle").
                                  agg(sum($"numberOfRequests").as("count")).
@@ -289,7 +303,7 @@ println(s"pagecountsDF2 partitions     = ${pagecountsDF2.rdd.partitions.length}"
 
 // MAGIC %md Okay, that's not 200.
 // MAGIC 
-// MAGIC If we reran the creation of `pagecountsDF2`, above, we might see 20, 21 or 22 for the number of post-shuffle partitions. Why?
+// MAGIC If we reran the creation of `pagecountsDF2`, above, we might see 18, 19, 20, 21, 22, or some number in that area for the number of post-shuffle partitions. Why?
 // MAGIC 
 // MAGIC It turns out that the `orderBy`, above, uses _range partitioning_. To determine reasonable upper and lower bounds for the range, Spark randomly samples the data. In this case, we end up with something around 22 partitions; the partition could might differ with different data. It's not always the same from run to run because the random sampling doesn't use the same seed every time.
 
